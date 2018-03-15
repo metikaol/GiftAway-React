@@ -8,8 +8,9 @@ import React, { Component } from 'react';
 // the React library.
 
 import PostDetails from './PostDetails';
+import AnswerForm from './AnswerForm';
 import AnswerList from './AnswerList';
-import { Post } from '../lib/requests';
+import { Post, Answer } from '../lib/requests';
 
 class PostShowPage extends Component {
   constructor (props) {
@@ -29,6 +30,7 @@ class PostShowPage extends Component {
 
     this.delete = this.delete.bind(this);
     this.deleteAnswer = this.deleteAnswer.bind(this);
+    this.createAnswer.bind(this);
   }
 
   componentDidMount () {
@@ -64,6 +66,28 @@ class PostShowPage extends Component {
         answers: answers.filter(answer => answer.id !== answerId)
       }
     })
+  }
+
+  createAnswer (params, id) {
+    const answerParams = {
+      id: id,
+      answer: params
+    }
+
+    Answer
+      .create(answerParams)
+      .then(data => {
+        // const id = data.id
+        // const { id } = data;
+
+        // Components rendered by the <Route /> component
+        // gain access to a .history than can be used to manipulate
+        // history. Using allows to redirect a user to
+        // a different rendering whichever component is there.
+        // this.props.history.push(`/posts/${id}`);
+        // reload the current page with updated data
+        window.location.reload()
+      })
   }
 
   render () {
@@ -113,6 +137,7 @@ class PostShowPage extends Component {
             Delete
           </button>
           <h3>Answers</h3>
+          <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
           <AnswerList
             answers={post.answers}
             onAnswerDeleteClick={this.deleteAnswer}

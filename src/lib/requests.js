@@ -8,6 +8,23 @@ function getJWT () {
 
 // HTTP REQUESTS
 
+const Answer = {
+  create (params) {
+    return fetch(
+      `${BASE_URL}/posts/${params.id}/answers`,
+      {
+        headers: {
+          'Authorization': getJWT(),
+          'Content-Type':'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(params)
+      }
+    )
+      .then(res => res.json())
+  }
+}
+
 const Post = {
   all () {
     return fetch(
@@ -68,4 +85,4 @@ const Token = {
 // to export multiple variables which must import by their
 // surround by braces.
 // `import { Post, Token } from './lib/Post'`
-export { Post, Token };
+export { Post, Token, Answer };

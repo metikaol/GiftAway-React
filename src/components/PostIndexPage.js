@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Field from './Field';
 import { Post } from '../lib/requests';
+import CarouselIndexPage from './CarouselIndexPage';
 
 // The React Component parent class is also available
 // as a property of the React default import object.
@@ -44,7 +45,7 @@ class PostIndexPage extends React.Component {
 
     const {posts} = this.state;
     const postId = parseInt(currentTarget.dataset.id, 10);
-    console.log(postId)
+    // console.log(postId)
     // To delete a post, will have to update the state
     // to version of the state where that post is no longer
     // present.
@@ -76,6 +77,7 @@ class PostIndexPage extends React.Component {
 
   render () {
     const { posts, loading } = this.state;
+    console.log('post', posts)
 
     if (loading) {
       return (
@@ -99,7 +101,10 @@ class PostIndexPage extends React.Component {
             {
               posts.map(
                 post => (
-                  <li key={post.id}>
+                    <li key={post.id}>
+                  <CarouselIndexPage
+                    images ={post.albums}
+                  />
                     <Link to={`/posts/${post.id}`}>
                       {post.title}
                     </Link>
@@ -109,6 +114,7 @@ class PostIndexPage extends React.Component {
                       onClick={this.deletePost}
                     >Delete</button>
                   </li>
+
                 )
               )
             }

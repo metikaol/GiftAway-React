@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+
 // React is default import.
 // Component (which must import with {}) is named import.
 
@@ -10,6 +12,7 @@ import React, { Component } from 'react';
 import PostDetails from './PostDetails';
 import AnswerForm from './AnswerForm';
 import AnswerList from './AnswerList';
+import CarouselIndexPage from './CarouselIndexPage';
 import { Post, Answer } from '../lib/requests';
 
 class PostShowPage extends Component {
@@ -92,7 +95,6 @@ class PostShowPage extends Component {
 
   render () {
     const { post, loading } = this.state;
-
     if (loading) {
       return (
         <main
@@ -130,6 +132,9 @@ class PostShowPage extends Component {
           margin: '0 1rem'
         }}
         >
+          <CarouselIndexPage
+            images={post.albums}
+          />
           <PostDetails {...post} />
           <button
             onClick={this.delete}

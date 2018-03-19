@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { InfoWindow } from 'react-google-maps'
 
 // React is default import.
 // Component (which must import with {}) is named import.
@@ -126,6 +126,16 @@ class PostShowPage extends Component {
 
     // 1rem is == to the font-size of the root tag (<html> ...).
     return (
+      // <InfoWindow
+      //   onCloseClick={this.props.closeWindow}>
+      //     <div>
+      //       <Link to={`/posts/${post.id}`}>
+      //         {post.title}
+      //       </Link>
+      //     </div>
+      //   </InfoWindow>
+
+
       <main
         className="PostShowPage"
         style={{

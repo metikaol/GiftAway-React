@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from 'nuka-carousel';
+import Mypic from './gifticon.png';
 const DOMAIN = 'http://localhost:3000';
 
 export default class CarouselIndexPage extends React.Component {
@@ -20,7 +21,8 @@ export default class CarouselIndexPage extends React.Component {
     if(images.length < 1){
       return (
       <div>
-      <img width="250px" height="250px" src="http://placehold.it/1000x400/ffffff/c0392b/&text=slide1" />
+        <img width="250px" height="250px" src={Mypic} />
+        {/* <img width="250px" height="250px" src="http://localhost:3001/src/components/gifticon.png" /> */}
       </div>
       )
     }

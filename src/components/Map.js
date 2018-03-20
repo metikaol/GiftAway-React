@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import PlaceMarker from './PlaceMarker';
 import { Maps } from '../lib/requests';
+const DOMAIN = 'http://localhost:3000';
+
 
 const GiftAwayMap = withGoogleMap(props => (
   <GoogleMap
@@ -35,7 +37,7 @@ class Map extends Component {
 
     this.mapFullyLoaded = false
 
-    this.zoom = 14
+    this.zoom = 12
 
     this.state = {
       places: [],
@@ -70,23 +72,17 @@ class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    // this.setState({ places: [] })
 
-    Maps
-      .all()
+    fetch(`${DOMAIN}/api/v1/posts?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
+      { method: 'GET' },
+      {
+        headers: {
+          'Authorization': localStorage.getItem('jwt')
+        }
+      })
+      .then((response) => response.json())
       .then((response) => this.setState({ places: response }))
       .catch((response)=> console.log(response))
-      // .then((response) => console.log(response))
-
-    // fetch(`/api/v1/posts?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
-    //   { method: 'GET' },
-    //   {
-    //     headers: {
-    //       'Authorization': localStorage.getItem('jwt')
-    //     }
-    //   })
-    //   .then((response) => response.json())
-    //   .then((response) => this.setState({ places: response }))
   }
 
 
@@ -108,14 +104,14 @@ class Map extends Component {
 
     return(
       <div style={{width: `750px`, height: `750px`}}>
-        <ul>
+        {/* <ul>
           <li>lng: {lng}</li>
           <li>lat: {lat}</li>
           <li>xMapBounds.min: {this.xMapBounds.min}</li>
           <li>xMapBounds.max: {this.xMapBounds.max}</li>
           <li>yMapBounds.min: {this.yMapBounds.min}</li>
           <li>yMapBounds.max: {this.yMapBounds.max}</li>
-        </ul>
+        </ul> */}
 
         <GiftAwayMap
           onMapMounted={this.handleMapMounted.bind(this)}

@@ -35,6 +35,7 @@ class PlaceMarker extends Component {
           key={`marker${id}`}>
           {showTooltip && (
           <PlaceInfoWindow key={`info${id}`}
+                              id={id}
                            title={title}
                            albums={albums}
                            closeWindow={this.closeWindow.bind(this)}/>

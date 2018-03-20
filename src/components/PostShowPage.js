@@ -9,6 +9,7 @@ import { InfoWindow } from 'react-google-maps'
 // where `Component` is the name of a variable inside
 // the React library.
 
+
 import PostDetails from './PostDetails';
 import AnswerForm from './AnswerForm';
 import AnswerList from './AnswerList';
@@ -157,6 +158,7 @@ class PostShowPage extends Component {
             answers={post.answers}
             onAnswerDeleteClick={this.deleteAnswer}
           />
+
         </main>
       )
   }

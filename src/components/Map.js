@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import PlaceMarker from './PlaceMarker';
+import { Maps } from '../lib/requests';
 
 const GiftAwayMap = withGoogleMap(props => (
   <GoogleMap
@@ -13,10 +14,13 @@ const GiftAwayMap = withGoogleMap(props => (
 
     {
       props.places.length > 0 && props.places.map(place => (
-        <PlaceMarker lat={50.0515918}
-                     lng={19.9357531}
-                     title={'title'}
-                     description={'description'}/>
+        <PlaceMarker key={`place${place.id}`}
+                     id={place.id}
+                     lat={place.latitude}
+                     lng={place.longitude}
+                     title={place.title}
+                     albums={place.albums}
+                     />
       ))
     }
   </GoogleMap>
@@ -66,9 +70,25 @@ class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    const place = <PlaceMarker lat={50.0515918} lng={19.9357531} price={20} name={"Hotel"} description={"Hotel desc"} />
-    this.setState({ places: [place] })
+    // this.setState({ places: [] })
+
+    Maps
+      .all()
+      .then((response) => this.setState({ places: response }))
+      .catch((response)=> console.log(response))
+      // .then((response) => console.log(response))
+
+    // fetch(`/api/v1/posts?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
+    //   { method: 'GET' },
+    //   {
+    //     headers: {
+    //       'Authorization': localStorage.getItem('jwt')
+    //     }
+    //   })
+    //   .then((response) => response.json())
+    //   .then((response) => this.setState({ places: response }))
   }
+
 
   getMapBounds() {
     var mapBounds = this.map.getBounds()

@@ -77,7 +77,7 @@ class PostIndexPage extends React.Component {
 
   render () {
     const { posts, loading } = this.state;
-    console.log('post', posts)
+    // console.log('post', posts)
 
     if (loading) {
       return (

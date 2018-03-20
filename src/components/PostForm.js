@@ -23,7 +23,7 @@ class PostForm extends Component {
         //   console.log('inside error', response.);
         //   //handler errors
         // } else {
-          console.log(response.data);
+          // console.log(response.data);
           this.setState({
             selectedPostCoverFiles: response.data.cover_photos,
             post: {

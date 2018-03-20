@@ -4,6 +4,7 @@ import Field from './Field';
 import { Post } from '../lib/requests';
 import CarouselIndexPage from './CarouselIndexPage';
 
+
 // The React Component parent class is also available
 // as a property of the React default import object.
 class PostIndexPage extends React.Component {
@@ -77,7 +78,7 @@ class PostIndexPage extends React.Component {
 
   render () {
     const { posts, loading } = this.state;
-    console.log('post', posts)
+    // console.log('post', posts)
 
     if (loading) {
       return (

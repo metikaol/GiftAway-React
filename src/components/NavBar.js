@@ -12,6 +12,7 @@ function NavBar (props) {
   return (
     <nav className="NavBar">
       <NavLink exact to="/">Home</NavLink>
+      <NavLink exact to="/map">Map</NavLink>
       <NavLink exact to="/posts/new">New Post</NavLink>
       <NavLink exact to="/posts">Posts</NavLink>
       {

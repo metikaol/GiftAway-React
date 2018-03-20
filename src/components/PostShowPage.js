@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { InfoWindow } from 'react-google-maps'
 
 // React is default import.
 // Component (which must import with {}) is named import.
@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 // To export a named import, React does `export { Component }`
 // where `Component` is the name of a variable inside
 // the React library.
+
 
 import PostDetails from './PostDetails';
 import AnswerForm from './AnswerForm';
@@ -126,6 +127,16 @@ class PostShowPage extends Component {
 
     // 1rem is == to the font-size of the root tag (<html> ...).
     return (
+      // <InfoWindow
+      //   onCloseClick={this.props.closeWindow}>
+      //     <div>
+      //       <Link to={`/posts/${post.id}`}>
+      //         {post.title}
+      //       </Link>
+      //     </div>
+      //   </InfoWindow>
+
+
       <main
         className="PostShowPage"
         style={{
@@ -147,6 +158,7 @@ class PostShowPage extends Component {
             answers={post.answers}
             onAnswerDeleteClick={this.deleteAnswer}
           />
+
         </main>
       )
   }

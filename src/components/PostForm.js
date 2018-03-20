@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axiosClient from '../lib/axiosClient';
 import './Index.css';
 
+
 class PostForm extends Component {
   state = {
     selectedPostCoverFiles: [],
@@ -12,6 +13,7 @@ class PostForm extends Component {
       id: this.props.match.params.id,
       title: '',
       body: '',
+      address: '',
       errors: {}
     }
   };
@@ -23,13 +25,14 @@ class PostForm extends Component {
         //   console.log('inside error', response.);
         //   //handler errors
         // } else {
-          console.log(response.data);
+          // console.log(response.data);
           this.setState({
             selectedPostCoverFiles: response.data.cover_photos,
             post: {
               id: response.data.id,
               title: response.data.title,
               body: response.data.body,
+              address: response.data.address,
               errors: {}
             }
           });
@@ -58,6 +61,7 @@ class PostForm extends Component {
             />
             {this.renderPostTitleInlineError()}
           </div>
+
           <div className="form-group">
             <label>Description</label>
             <textarea
@@ -68,8 +72,20 @@ class PostForm extends Component {
             />
             {this.renderPostDescriptionInlineError()}
           </div>
+
           <div className="form-group">
-            <label>Covers</label>
+            <label>Location for picking up</label>
+            <input
+              type="text"
+              onChange={e => this.handlePostAddressChange(e)}
+              value={this.state.post.address}
+              className="form-control"
+            />
+            {this.renderPostAddressInlineError()}
+          </div>
+
+          <div className="form-group">
+            <label>Pictures</label>
             {this.renderUploadCoversButton()}
             {this.renderSelectedPostCoverFiles()}
           </div>
@@ -231,6 +247,13 @@ class PostForm extends Component {
     this.setState({ post: post });
   }
 
+  handlePostAddressChange(e) {
+    let { post } = this.state;
+    post.address = e.target.value;
+    this.setState({ post: post });
+  }
+
+
   renderPostTitleInlineError() {
     if (this.state.post.errors.title) {
       return (
@@ -255,6 +278,18 @@ class PostForm extends Component {
     }
   }
 
+  renderPostAddressInlineError() {
+    if (this.state.post.errors.address) {
+      return (
+        <div className="inline-error alert alert-danger">
+          {this.state.post.errors.address.join(', ')}
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
   handleCancel() {
     this.props.history.push('/posts');
   }
@@ -263,6 +298,7 @@ class PostForm extends Component {
     let formData = new FormData();
     formData.append('post[title]', this.state.post.title);
     formData.append('post[body]', this.state.post.body);
+    formData.append('post[address]', this.state.post.address);
 
     let { selectedPostCoverFiles } = this.state;
     for (let i = 0; i < selectedPostCoverFiles.length; i++) {

@@ -8,6 +8,7 @@ import {
   Switch
 } from "react-router-dom";
 
+import Map from './Map';
 import PostShowPage from './PostShowPage';
 import PostIndexPage from './PostIndexPage';
 import PostNewPage from './PostNewPage';
@@ -86,6 +87,11 @@ class App extends Component {
               isAuthenticated={this.isSignedIn()}
               path="/posts/:id"
               component={PostShowPage}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              path="/map"
+              component={Map}
             />
             {/* <Route path="/sign_in" component={SignInPage} /> */}
             <Route

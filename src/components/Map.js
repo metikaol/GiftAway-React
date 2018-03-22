@@ -1,3 +1,4 @@
+import SearchBox from './SearchBox';
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import PlaceMarker from './PlaceMarker';
@@ -85,6 +86,12 @@ class Map extends Component {
       .catch((response)=> console.log(response))
   }
 
+  updatePosts (posts){
+    this.setState({
+      places: posts
+    })
+  }
+
 
   getMapBounds() {
     var mapBounds = this.map.getBounds()
@@ -104,6 +111,7 @@ class Map extends Component {
 
     return(
       <div style={{width: `750px`, height: `750px`}}>
+        <SearchBox updatePosts={this.updatePosts.bind(this)}/>
         {/* <ul>
           <li>lng: {lng}</li>
           <li>lat: {lat}</li>

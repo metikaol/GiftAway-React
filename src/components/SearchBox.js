@@ -11,10 +11,8 @@ class SearchBox extends Component {
 
 
   createSearch (params) {
-    const param1 = params.search1.split(" ").join("+")
-    const param2 = params.search2.split(" ").join("+")
-        // param = param.split(" ").join("+")
-        // debugger
+    const param1 = params.search1.trim().split(" ").join("+")
+    const param2 = params.search2.trim().split(" ").join("+")
     Post
       .search(param1,param2)
       .then(posts => {

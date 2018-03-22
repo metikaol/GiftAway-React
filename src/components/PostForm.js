@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import axiosClient from '../lib/axiosClient';
 import './Index.css';
-
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 class PostForm extends Component {
-  state = {
-    selectedPostCoverFiles: [],
-    submitFormProgress: 0,
-    isSubmittingForm: false,
-    didFormSubmissionComplete: false,
-    post: {
-      id: this.props.match.params.id,
-      title: '',
-      body: '',
-      address: '',
-      errors: {}
+  constructor(props) {
+    super(props);
+    this.onChangeAddress = (address) => {
+      console.log('address', this.state)
+      this.setState({ post: Object.assign(this.state.post, { address: address }) });
     }
-  };
+    this.state = {
+      selectedPostCoverFiles: [],
+      submitFormProgress: 0,
+      isSubmittingForm: false,
+      didFormSubmissionComplete: false,
+      post: {
+        id: props.match.params.id,
+        title: '',
+        body: '',
+        address: '',
+        errors: {}
+      }
+    };
+  }
 
   componentWillMount() {
     if (this.props.match.params.id) {
@@ -75,12 +82,10 @@ class PostForm extends Component {
 
           <div className="form-group">
             <label>Location for picking up</label>
-            <input
-              type="text"
-              onChange={e => this.handlePostAddressChange(e)}
-              value={this.state.post.address}
-              className="form-control"
-            />
+            <PlacesAutocomplete inputProps={{
+                  value: this.state.post.address,
+                  onChange: this.onChangeAddress,
+                }}/>
             {this.renderPostAddressInlineError()}
           </div>
 
@@ -108,6 +113,13 @@ class PostForm extends Component {
       </div>
     );
   }
+
+  // <input
+  //   type="text"
+  //   onChange={e => this.handlePostAddressChange(e)}
+  //   value={this.state.post.address}
+  //   className="form-control"
+  // />
 
   renderUploadCoversButton() {
     let numberOfSelectedCovers = this.getNumberOfSelectedFiles();
@@ -248,6 +260,7 @@ class PostForm extends Component {
   }
 
   handlePostAddressChange(e) {
+    console.log(e.target)
     let { post } = this.state;
     post.address = e.target.value;
     this.setState({ post: post });

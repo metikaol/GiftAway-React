@@ -15,6 +15,7 @@ import PostNewPage from './PostNewPage';
 import SignInPage from './SignInPage';
 import NavBar from './NavBar';
 import AuthRoute from './AuthRoute';
+import SearchBox from './SearchBox';
 
 // When building React applications, we create
 // a root component that is the ancestor to all the
@@ -92,6 +93,11 @@ class App extends Component {
               isAuthenticated={this.isSignedIn()}
               path="/map"
               component={Map}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              path="/search"
+              component={SearchBox}
             />
             {/* <Route path="/sign_in" component={SignInPage} /> */}
             <Route

@@ -40,6 +40,20 @@ const Answer = {
 }
 
 const Post = {
+
+  search (param1,param2) {
+    debugger
+    return fetch(
+      `${BASE_URL}/posts?utf8=✓&search1=${param1}&search2=${param2}`,
+      {
+        headers: {
+          'Authorization': getJWT(),
+        }
+      }
+    )
+      .then(res => res.json())
+  },
+
   all () {
     return fetch(
       `${BASE_URL}/posts`,

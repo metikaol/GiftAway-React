@@ -13,8 +13,8 @@ function SearchForm (props) {
     //   Array.from(formData.entries())
     // )
     onSubmit({
-      contact: formData.get('contact'),
-      body: formData.get('body')
+      search1: formData.get('search1'),
+      search2: formData.get('search2')
     });
   }
 
@@ -24,13 +24,13 @@ function SearchForm (props) {
       onSubmit={handleSubmit}
     >
       <div>
-        <label htmlFor="body">Your Search</label> <br />
-        <input name="body" id="body" />
+        <label htmlFor="search2">Search by location</label> <br />
+        <input name="search2" id="search2" />
       </div>
 
       <div>
-        <label htmlFor="contact">Contact</label> <br />
-        <textarea name="contact" id="contact" cols="60" rows="4" />
+        <label htmlFor="search1">Search by specific Item</label> <br />
+        <input name="search1" id="search1" cols="60" rows="4" />
       </div>
 
       <div>

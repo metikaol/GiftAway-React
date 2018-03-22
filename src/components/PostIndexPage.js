@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Field from './Field';
 import { Post } from '../lib/requests';
 import CarouselIndexPage from './CarouselIndexPage';
+import SearchBox from './SearchBox';
+
 
 
 // The React Component parent class is also available
@@ -25,6 +27,7 @@ class PostIndexPage extends React.Component {
     // where `this` is bound permanently.
     this.deletePost = this.deletePost.bind(this);
     this.addPost = this.addPost.bind(this);
+    this.updatePosts = this.updatePosts.bind(this);
   }
 
   componentDidMount () {
@@ -76,6 +79,12 @@ class PostIndexPage extends React.Component {
     })
   }
 
+  updatePosts (posts){
+    this.setState({
+      posts: posts
+    })
+  }
+
   render () {
     const { posts, loading } = this.state;
     // console.log('post', posts)
@@ -92,12 +101,15 @@ class PostIndexPage extends React.Component {
       )
     }
 
+
+
     return (
       <main
         className="PostIndexPage"
         style={{margin: '0 1rem'}}
         >
           <h2>Posts</h2>
+          <SearchBox updatePosts={this.updatePosts}/>
           <ul>
             {
               posts.map(
@@ -110,11 +122,13 @@ class PostIndexPage extends React.Component {
                       {post.title}
                     </Link>
                     <Field name="Author" value={post.author.full_name} />
+                    <Field name="Location" value={post.address} />
                     <button
                       data-id={post.id}
                       onClick={this.deletePost}
                     >Delete</button>
                   </li>
+
 
                 )
               )

@@ -1,4 +1,4 @@
-import { Button, Fade } from 'reactstrap';
+import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import SearchBox from './SearchBox';
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
@@ -58,10 +58,12 @@ class Map extends Component {
         lat: 49.246292,
         lng: -123.116226
       },
-      fadeIn: false
+      collapse: false
     };
-
     this.toggle = this.toggle.bind(this);
+  }
+    toggle() {
+      this.setState({ collapse: !this.state.collapse });
   }
 
   handleMapChanged() {
@@ -128,13 +130,6 @@ class Map extends Component {
     this.yMapBounds.max = yMapBounds.b
   }
 
-  toggle() {
-      this.setState({
-          fadeIn: !this.state.fadeIn
-      });
-      console.log("toggle")
-  }
-
   render() {
     const { places } = this.state;
 
@@ -142,15 +137,14 @@ class Map extends Component {
       <div style={{width: `750px`, height: `750px`}}>
 
         <div>
-            <Button color="primary" onClick={this.toggle}>Toggle Fade</Button>
-            <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
-              hello
-            </Fade>
-            {this.state.fadeIn ? (
-              <SearchBox updatePosts={this.updatePosts.bind(this)}/>
-            ) : (
-              ""
-            )}
+          <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Search</Button>
+          <Collapse isOpen={this.state.collapse}>
+            <Card>
+              <CardBody>
+                <SearchBox updatePosts={this.updatePosts.bind(this)}/>
+              </CardBody>
+            </Card>
+          </Collapse>
         </div>
 
 

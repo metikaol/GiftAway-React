@@ -42,7 +42,6 @@ const Answer = {
 const Post = {
 
   search (param1,param2) {
-    debugger
     return fetch(
       `${BASE_URL}/posts?utf8=✓&search1=${param1}&search2=${param2}`,
       {

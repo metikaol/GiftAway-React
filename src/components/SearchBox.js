@@ -13,10 +13,11 @@ class SearchBox extends Component {
   createSearch (params) {
     const param1 = params.search1.trim().split(" ").join("+")
     const param2 = params.search2.trim().split(" ").join("+")
+    const latLng = params.latLng
     Post
       .search(param1,param2)
       .then(posts => {
-        this.props.updatePosts(posts);
+        this.props.updatePosts(posts, latLng);
 
         // this.props.history.push(`/posts`);
         // window.location.reload()

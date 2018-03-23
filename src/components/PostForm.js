@@ -7,7 +7,6 @@ class PostForm extends Component {
   constructor(props) {
     super(props);
     this.onChangeAddress = (address) => {
-      console.log('address', this.state)
       this.setState({ post: Object.assign(this.state.post, { address: address }) });
     }
     this.state = {
@@ -260,7 +259,6 @@ class PostForm extends Component {
   }
 
   handlePostAddressChange(e) {
-    console.log(e.target)
     let { post } = this.state;
     post.address = e.target.value;
     this.setState({ post: post });

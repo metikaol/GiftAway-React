@@ -1,5 +1,5 @@
 import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+  CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Field from './Field';
@@ -17,7 +17,8 @@ class PostIndexPage extends React.Component {
 
     this.state = {
       posts: [],
-      loading: true
+      loading: true,
+      collapse: false
     }
 
     // When using a method as a callback, we must bind
@@ -27,6 +28,7 @@ class PostIndexPage extends React.Component {
     // `.bind()` is a method of functions that effectively
     // creates new function that is copy of the function
     // where `this` is bound permanently.
+    this.toggle = this.toggle.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.addPost = this.addPost.bind(this);
     this.updatePosts = this.updatePosts.bind(this);
@@ -87,6 +89,11 @@ class PostIndexPage extends React.Component {
     })
   }
 
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
+  }
+
+
   render () {
     const { posts, loading } = this.state;
     // console.log('post', posts)
@@ -104,52 +111,59 @@ class PostIndexPage extends React.Component {
     }
 
 
-
     return (
-      <main
-        className="PostIndexPage"
-        style={{margin: '0 1rem',
-                boder: "10px"
-              }}
-        >
-          <h2>Posts</h2>
-          <div>
-          <SearchBox updatePosts={this.updatePosts}/>
-          </div>
+        <Container fluid>
+          <main>
 
-          <div>
-          <ul>
-            {
-              posts.map(
-                post => (
-                  <Card body outline color="secondary">
-                    <li key={post.id}>
-                    <CarouselIndexPage
-                    images ={post.albums}
-                  />
-                  <CardBody>
-                    <CardTitle>
-                    <Link to={`/posts/${post.id}`}>
-                      {post.title}
-                    </Link>
-                    </CardTitle>
-                    {/* <Field name="Author" value={post.author.full_name} /> */}
-                    <Field name="Location" value={post.address} />
-                    <button
-                      data-id={post.id}
-                      onClick={this.deletePost}
-                    >Delete</button>
-                    </CardBody>
-                  </li>
-                  </Card>
+            <Button className="ml-5" outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
+            <Collapse isOpen={this.state.collapse}>
+              <Card>
+                <CardBody>
+                  <SearchBox updatePosts={this.updatePosts}/>
+                </CardBody>
+              </Card>
+            </Collapse>
 
 
-                )
-              )
-            }
-          </ul>
-        </div>
+          {/* <h2>Posts</h2> */}
+          <CardDeck>
+            <Row>
+
+              <ul>
+                {
+                  posts.map(
+                    post => (
+                      <Col key={post.id} lg="3">
+                      <Card style={{width: "253px", hight: "400px"}}>
+                        <li key={post.id} className="mh-100">
+                        <CarouselIndexPage
+                        images ={post.albums}
+                      />
+                      <CardBody>
+                        <CardTitle>
+                        <Link style={{fontSize: 20}} to={`/posts/${post.id}`}>
+                          {post.title}
+                        </Link>
+                        </CardTitle>
+                        {/* <Field name="Author" value={post.author.full_name} /> */}
+                        <Field name="Location" value={post.address} />
+                        <Button
+                          data-id={post.id}
+                          onClick={this.deletePost}
+                        >Delete</Button>
+                        </CardBody>
+                      </li>
+                      </Card>
+                    </Col>
+                    )
+                  )
+                }
+              </ul>
+            </Row>
+          </CardDeck>
       </main>
+    </Container>
+
       )
   }
 }

@@ -134,14 +134,14 @@ class Map extends Component {
     const { places } = this.state;
 
     return(
-      <div style={{width: `750px`, height: `750px`}}>
+      <div style={{width: `1200px`, height: `550px`, marginLeft: "125px"}}>
 
         <div>
-          <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Search</Button>
+          <Button outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
           <Collapse isOpen={this.state.collapse}>
             <Card>
               <CardBody>
-                <SearchBox updatePosts={this.updatePosts.bind(this)}/>  
+                <SearchBox updatePosts={this.updatePosts.bind(this)}/>
               </CardBody>
             </Card>
           </Collapse>

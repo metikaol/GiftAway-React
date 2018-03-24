@@ -3,20 +3,10 @@ import Field from './Field';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 
-// When creating a react component, make sure to use
-// CapitalizedCamelCase. React interprets lower
-// components as HTML tags and will try to render as such
-// ignoring your component.
+
 function PostDetails (props) {
   const {author = {}} = props;
-  // To write JavaScript expression inside of JSX,
-  // use {} like the {props.title} below.
-  // The expression must return:
-  // - A string
-  // - Or, a number
-  // - Or, null/undefined
-  // - Or, a React element
-  // - Or, an array of React elements
+
   return (
     <div>
 

@@ -34,7 +34,7 @@ export default class CarouselIndexPage extends React.Component {
           {
             images.map(
               image => (
-                  <img  width="250px" height="250px" src={`${DOMAIN}${image.photo_url}`} />
+                  <img key={image.id} width="250px" height="250px" src={`${DOMAIN}${image.photo_url}`} />
               )
             )
           }

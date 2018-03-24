@@ -50,19 +50,19 @@ class SearchForm extends Component {
     >
       <div className="form-group">
         {/* <label htmlFor="search2">Search by location</label> <br /> */}
-        <PlacesAutocomplete inputProps={{
+        <PlacesAutocomplete style={{fontSize: 20}} inputProps={{
           value: this.state.search2,
           onChange: this.onChangeAddress,
           name: "search2",
-          placeholder: "By Location",
+          placeholder: "Location",
         }}/>
       </div>
 
       <FormGroup>
-        <input name="search1" id="search1" placeholder=" By Item" />
+        <input style={{fontSize: 15}} name="search1" id="search1" placeholder="  Item" />
       </FormGroup>
 
-        <Button type="submit" value="Submit" color="primary">Submit</Button>
+        <Button  outline style={{fontSize: 15}}type="submit" value="Submit" color="primary">Submit</Button>
     </Form>
 
 

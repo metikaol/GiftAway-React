@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Token } from '../lib/requests';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 class SignInPage extends Component {
   constructor (props) {
@@ -36,25 +38,34 @@ class SignInPage extends Component {
     return (
       <main
         className="SignInPage"
-        style={{margin: '0 1rem'}}
+        // style={{margin: '0 1rem'}}
       >
-        <h2>Sign In</h2>
-        <form onSubmit={this.createToken}>
-          <div>
-            <label htmlFor='email'>Email</label> <br />
-            <input type='email' id='email' name='email'/>
-          </div>
+        <br/><br/><br/><br/>
+        <br/><br/><br/><br/>
+        <br/><br/><br/><br/>
+        <Container style={{height: "500px"}}>
+        <Row style={{height: "100%"}}>
+        <Col sm="12" md={{ size: 8, offset: 3 }}>
+        <Form inline onSubmit={this.createToken}>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label style={{fontSize: 20, marginRight: 3}} htmlFor='email' hidden>Email</Label> <br />
+            <Input type='email' id='email' style={{fontSize: 20}} name='email'placeholder="Email"/>
+          </FormGroup>
 
-          <div>
-            <label htmlFor='password'>Password</label> <br />
-            <input type='password' id='password' name='password' />
-          </div>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label style={{fontSize: 20, marginRight: 3}} htmlFor='password' hidden>Password</Label> <br />
+            <Input type='password' id='password' name='password'placeholder="Password" style={{fontSize: 20}} />
+          </FormGroup>
 
-          <div>
-            <input type='submit' value='Sign In'/>
-          </div>
-        </form>
+          <FormGroup className="mb-2 ml-sm-2 mt-sm-2">
+            <Button outline color="primary" style={{fontSize: 20}} input type='submit'>Sign In </Button>
+          </FormGroup>
+        </Form>
+      </Col>
+      </Row>
+    </Container>
       </main>
+
     )
   }
 }

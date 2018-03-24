@@ -141,7 +141,7 @@ class Map extends Component {
           <Collapse isOpen={this.state.collapse}>
             <Card>
               <CardBody>
-                <SearchBox updatePosts={this.updatePosts.bind(this)}/>
+                <SearchBox updatePosts={this.updatePosts.bind(this)}/>  
               </CardBody>
             </Card>
           </Collapse>

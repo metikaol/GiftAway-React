@@ -1,3 +1,5 @@
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Field from './Field';
@@ -106,35 +108,48 @@ class PostIndexPage extends React.Component {
     return (
       <main
         className="PostIndexPage"
-        style={{margin: '0 1rem'}}
+        style={{margin: '0 1rem',
+                boder: "10px"
+              }}
         >
           <h2>Posts</h2>
+          <div>
           <SearchBox updatePosts={this.updatePosts}/>
+          </div>
+
+          <div>
           <ul>
             {
               posts.map(
                 post => (
+                  <Card body outline color="secondary">
                     <li key={post.id}>
-                  <CarouselIndexPage
+                    <CarouselIndexPage
                     images ={post.albums}
                   />
+                  <CardBody>
+                    <CardTitle>
                     <Link to={`/posts/${post.id}`}>
                       {post.title}
                     </Link>
-                    <Field name="Author" value={post.author.full_name} />
+                    </CardTitle>
+                    {/* <Field name="Author" value={post.author.full_name} /> */}
                     <Field name="Location" value={post.address} />
                     <button
                       data-id={post.id}
                       onClick={this.deletePost}
                     >Delete</button>
+                    </CardBody>
                   </li>
+                  </Card>
 
 
                 )
               )
             }
           </ul>
-        </main>
+        </div>
+      </main>
       )
   }
 }

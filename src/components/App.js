@@ -13,6 +13,7 @@ import PostShowPage from './PostShowPage';
 import PostIndexPage from './PostIndexPage';
 import PostNewPage from './PostNewPage';
 import SignInPage from './SignInPage';
+import SignUpPage from './SignUpPage';
 import NavBar from './NavBar';
 import AuthRoute from './AuthRoute';
 import SearchBox from './SearchBox';
@@ -107,9 +108,13 @@ class App extends Component {
                   <SignInPage
                     {...props}
                     onSignIn={this.signIn}
-                  />
+                    />
                 )
               }
+            />
+            <Route
+              path="/sign_up"
+              render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
             />
           </Switch>
         </div>

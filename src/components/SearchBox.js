@@ -3,6 +3,8 @@ import SearchForm from './SearchForm';
 import { Post } from '../lib/requests';
 
 
+
+
 class SearchBox extends Component {
   constructor (props) {
     super(props)
@@ -30,7 +32,6 @@ class SearchBox extends Component {
   render() {
   return (
     <div className="SearchBox col-md-8 col-md-offset-2">
-      <h2>Search</h2>
       <SearchForm onSubmit={values => this.createSearch(values)}/>
     </div>
   );

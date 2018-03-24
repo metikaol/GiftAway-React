@@ -53,3 +53,7 @@ div.PostForm ul.selected-covers li div.file-name {
   text-align: center;
   margin-top: 10px;
 }
+
+div.form-group{
+   border-radius:10px;
+}

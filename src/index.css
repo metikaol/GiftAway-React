@@ -11,7 +11,7 @@ body {
 
 .NavBar {
   display: flex;
-  background-color: tomato;
+  background-color: deepskyblue;
   color: white;
 }
 
@@ -22,7 +22,7 @@ body {
 .NavBar > * {
   padding: 0.75em 0.5em;
   text-decoration: none;
-  border-bottom: 5px solid tomato;
+  border-bottom: 5px solid deepskyblue;
 }
 
 .NavBar > .active {
@@ -104,10 +104,3 @@ body {
 .map-price-marker:hover:before {
   border-color: gray transparent transparent;
 }
-
-
-
-
-
-
-/* */

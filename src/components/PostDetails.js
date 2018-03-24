@@ -1,5 +1,7 @@
 import React from 'react';
 import Field from './Field';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 // When creating a react component, make sure to use
 // CapitalizedCamelCase. React interprets lower
@@ -17,12 +19,15 @@ function PostDetails (props) {
   // - Or, an array of React elements
   return (
     <div>
+
+
       <h2>{props.title}</h2>
       <p>{props.body}</p>
       <p>By {author.full_name}</p>
       <Field name="View Count" value={props.view_count} />
       <Field name="Created At" value={props.created_at} />
       <Field name="Updated At" value={props.updated_at} />
+
     </div>
   );
 }

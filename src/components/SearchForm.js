@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import './Index.css';
 
 class SearchForm extends Component {
 
@@ -42,29 +44,28 @@ class SearchForm extends Component {
 
   render () {
     return (
-    <form
+    <Form
       className="SearchForm"
       onSubmit={this.handleSubmit}
     >
-      <div>
-        <label htmlFor="search2">Search by location</label> <br />
+      <div className="form-group">
+        {/* <label htmlFor="search2">Search by location</label> <br /> */}
         <PlacesAutocomplete inputProps={{
           value: this.state.search2,
           onChange: this.onChangeAddress,
           name: "search2",
+          placeholder: "By Location",
         }}/>
-        {/* <input name="search2" id="search2" /> */}
       </div>
 
-      <div>
-        <label htmlFor="search1">Search by specific Item</label> <br />
-        <input name="search1" id="search1" cols="60" rows="4" />
-      </div>
+      <FormGroup>
+        <input name="search1" id="search1" placeholder=" By Item" />
+      </FormGroup>
 
-      <div>
-        <input type="submit" value="Submit"/>
-      </div>
-    </form>
+        <Button type="submit" value="Submit" color="primary">Submit</Button>
+    </Form>
+
+
     )
   }
 }

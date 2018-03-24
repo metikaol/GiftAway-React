@@ -22,6 +22,25 @@ const Maps = {
   }
 }
 
+const User = {
+  create(params) {
+    debugger
+    return fetch(`${BASE_URL}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user: params })
+    }).then(res => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        return { error: 'Could not create the user' };
+      }
+    });
+  }
+};
+
 const Answer = {
   create (params) {
     return fetch(
@@ -112,4 +131,4 @@ const Token = {
 // to export multiple variables which must import by their
 // surround by braces.
 // `import { Post, Token } from './lib/Post'`
-export { Post, Token, Answer, Maps };
+export { Post, Token, Answer, Maps, User };

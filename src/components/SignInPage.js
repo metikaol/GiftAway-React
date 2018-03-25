@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Token } from '../lib/requests';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Alert } from 'reactstrap';
 
 class SignInPage extends Component {
   constructor (props) {
     super(props);
+
+      this.state = {
+        errors: []
+      }
 
     this.createToken = this.createToken.bind(this);
   }
@@ -22,7 +26,7 @@ class SignInPage extends Component {
         password: formData.get('password')
       })
       .then(data => {
-        if (!data.error) {
+        if (!data.errors) {
           localStorage.setItem('jwt', data.jwt);
           onSignIn()
           // .history is only available on props
@@ -30,16 +34,29 @@ class SignInPage extends Component {
           // route component.
           // (i.e. <Route route="/sign_in" component={SignInPage} />)
           this.props.history.push('/');
+        } else {
+          this.setState({
+            errors: [{
+              message: "Invalid username or password!"
+            }]
+          });
         }
       })
   }
 
   render () {
+    const { errors } = this.state;
     return (
       <main
         className="SignInPage"
         // style={{margin: '0 1rem'}}
       >
+        {
+          errors.map(
+            (e, i) => <Alert  color="danger" className="alert" key={i}>{e.message}</Alert>
+          )
+        }
+
         <br/><br/><br/><br/>
         <br/><br/><br/><br/>
         <br/><br/><br/><br/>

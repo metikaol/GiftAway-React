@@ -14,6 +14,8 @@ import PostIndexPage from './PostIndexPage';
 import PostNewPage from './PostNewPage';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
+import NotFoundPage from './NotFoundPage';
+import HomePage from './HomePage';
 import NavBar from './NavBar';
 import AuthRoute from './AuthRoute';
 import SearchBox from './SearchBox';
@@ -75,6 +77,7 @@ class App extends Component {
             only the first Route that matches will be rendered.
           */}
           <Switch>
+            <Route exact path="/" component={HomePage} />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
               exact
@@ -116,6 +119,7 @@ class App extends Component {
               path="/sign_up"
               render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
             />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </Router>

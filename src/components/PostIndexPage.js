@@ -1,4 +1,4 @@
-import { Card, CardImg, CardText, CardBody,
+import { Card, CardImg, CardText, CardBody,CardFooter,
   CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -133,9 +133,9 @@ class PostIndexPage extends React.Component {
                 {
                   posts.map(
                     post => (
-                      <Col key={post.id} lg="3">
-                      <Card style={{width: "253px", hight: "400px"}}>
-                        <li key={post.id} className="mh-100">
+                      <Col key={post.id} sm="3">
+                        <li key={post.id}>
+                        <Card style={{width: "253px", hight: "400px"}}>
                         <CarouselIndexPage
                         images ={post.albums}
                       />
@@ -152,8 +152,9 @@ class PostIndexPage extends React.Component {
                           onClick={this.deletePost}
                         >Delete</Button>
                         </CardBody>
-                      </li>
+                        <CardFooter>Footer</CardFooter>
                       </Card>
+                      </li>
                     </Col>
                     )
                   )

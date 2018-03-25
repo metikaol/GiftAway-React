@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import axiosClient from '../lib/axiosClient';
 import './Index.css';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import FormErrors from './FormErrors';
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.onChangeAddress = (address) => {
       this.setState({ post: Object.assign(this.state.post, { address: address }) });
+
     }
     this.state = {
       selectedPostCoverFiles: [],
@@ -54,6 +56,7 @@ class PostForm extends Component {
   }
 
   render() {
+    // const { errors=[] } = this.props
     return (
       <div className="PostForm">
         <form>
@@ -65,6 +68,7 @@ class PostForm extends Component {
               value={this.state.post.title}
               className="form-control"
             />
+            {/* <FormErrors forField="title" errors={errors} /> */}
             {this.renderPostTitleInlineError()}
           </div>
 
@@ -76,6 +80,7 @@ class PostForm extends Component {
               value={this.state.post.body}
               className="form-control"
             />
+            {/* <FormErrors forField="body" errors={errors} /> */}
             {this.renderPostDescriptionInlineError()}
           </div>
 
@@ -85,6 +90,7 @@ class PostForm extends Component {
                   value: this.state.post.address,
                   onChange: this.onChangeAddress,
                 }}/>
+            {/* <FormErrors forField="address" errors={errors} /> */}
             {this.renderPostAddressInlineError()}
           </div>
 
@@ -290,6 +296,7 @@ class PostForm extends Component {
   }
 
   renderPostAddressInlineError() {
+    console.log("address", this.state.post.errors.errors)
     if (this.state.post.errors.address) {
       return (
         <div className="inline-error alert alert-danger">

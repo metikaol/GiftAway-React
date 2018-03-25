@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { InfoWindow } from 'react-google-maps'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 
 // React is default import.
 // Component (which must import with {}) is named import.
@@ -18,20 +20,16 @@ import { Post, Answer } from '../lib/requests';
 
 class PostShowPage extends Component {
   constructor (props) {
-    // When class based component is first initialize, the
-    // `props` are passed to the constructor. When inside constructor
-    // and only when inside, you should use `props` without `this.`.
     super(props);
-    // When overriding the Component's constructor, we must
-    // always use `super(props);` to call the constructor of
-    // the Component class. This configures our component such
-    // as setting the `props` on `this`.
+
 
     this.state = {
       post: {},
-      loading: true
+      loading: true,
+      modal: false
     };
 
+    this.toggle = this.toggle.bind(this);
     this.delete = this.delete.bind(this);
     this.deleteAnswer = this.deleteAnswer.bind(this);
     this.createAnswer.bind(this);
@@ -94,8 +92,15 @@ class PostShowPage extends Component {
       })
   }
 
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
   render () {
     const { post, loading } = this.state;
+
     if (loading) {
       return (
         <main
@@ -152,12 +157,20 @@ class PostShowPage extends Component {
           >
             Delete
           </button>
-          <h3>Answers</h3>
-          <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
-          <AnswerList
+          <br/>
+          <br/>
+
+          <Button outline color="primary" style={{ fontSize: 15}} onClick={this.toggle}>{this.props.buttonLabel}Contact Donator</Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
+            <ModalBody>
+              <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
+          {/* <AnswerList
             answers={post.answers}
             onAnswerDeleteClick={this.deleteAnswer}
-          />
+          /> */}
+        </ModalBody>
+      </Modal>
 
         </main>
       )

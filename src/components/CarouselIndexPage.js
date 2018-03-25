@@ -16,9 +16,9 @@ export default class CarouselIndexPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.images)
+    // console.log(this.props.images)
     const { images } = this.props
-    console.log('image',images)
+    // console.log('image',images)
 
     if(images.length < 1){
       return (

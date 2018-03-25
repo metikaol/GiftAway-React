@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.FormErrors {
+  color: red;
+}
+
 body {
   margin: 0;
   padding: 0;

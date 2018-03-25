@@ -56,32 +56,30 @@ class PostForm extends Component {
   }
 
   render() {
-    // const { errors=[] } = this.props
+    const { errors=[] } = this.state.post.errors
     return (
       <div className="PostForm">
         <form>
           <div className="form-group">
             <label>Title</label>
-            <input
+            <input style={{ fontSize: 15}}
               type="text"
               onChange={e => this.handlePostTitleChange(e)}
               value={this.state.post.title}
               className="form-control"
             />
-            {/* <FormErrors forField="title" errors={errors} /> */}
-            {this.renderPostTitleInlineError()}
+            <FormErrors forField="title" errors={errors} />
           </div>
 
           <div className="form-group">
             <label>Description</label>
-            <textarea
+            <textarea style={{ fontSize: 15}}
               type="text"
               onChange={e => this.handlePostDescriptionChange(e)}
               value={this.state.post.body}
               className="form-control"
             />
-            {/* <FormErrors forField="body" errors={errors} /> */}
-            {this.renderPostDescriptionInlineError()}
+            <FormErrors forField="body" errors={errors} />
           </div>
 
           <div className="form-group">
@@ -90,8 +88,7 @@ class PostForm extends Component {
                   value: this.state.post.address,
                   onChange: this.onChangeAddress,
                 }}/>
-            {/* <FormErrors forField="address" errors={errors} /> */}
-            {this.renderPostAddressInlineError()}
+            <FormErrors forField="address" errors={errors} />
           </div>
 
           <div className="form-group">
@@ -103,14 +100,14 @@ class PostForm extends Component {
           <button
             disabled={this.state.isSubmittingForm}
             onClick={e => this.handleFormSubmit()}
-            className="btn btn-primary">
+            className="btn btn-outline-primary btn-lg ">
             {this.state.isSubmittingForm ? 'Saving...' : 'Save'}
           </button>
           &nbsp;
           <button
             disabled={this.state.isSubmittingForm}
             onClick={e => this.handleCancel()}
-            className="btn btn-default">
+            className="btn btn-outline-secondary btn-lg">
             Cancel
           </button>
         </form>
@@ -119,12 +116,7 @@ class PostForm extends Component {
     );
   }
 
-  // <input
-  //   type="text"
-  //   onChange={e => this.handlePostAddressChange(e)}
-  //   value={this.state.post.address}
-  //   className="form-control"
-  // />
+
 
   renderUploadCoversButton() {
     let numberOfSelectedCovers = this.getNumberOfSelectedFiles();
@@ -151,7 +143,7 @@ class PostForm extends Component {
         />
         <label
           disabled={this.state.isSubmittingForm}
-          className="btn btn-success"
+          className="btn btn-primary"
           htmlFor="post_covers">
           <span className="glyphicon glyphicon-cloud-upload" />
           &nbsp; &nbsp;
@@ -268,44 +260,6 @@ class PostForm extends Component {
     let { post } = this.state;
     post.address = e.target.value;
     this.setState({ post: post });
-  }
-
-
-  renderPostTitleInlineError() {
-    if (this.state.post.errors.title) {
-      return (
-        <div className="inline-error alert alert-danger">
-          {this.state.post.errors.title.join(', ')}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  renderPostDescriptionInlineError() {
-    if (this.state.post.errors.body) {
-      return (
-        <div className="inline-error alert alert-danger">
-          {this.state.post.errors.body.join(', ')}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  renderPostAddressInlineError() {
-    console.log("address", this.state.post.errors.errors)
-    if (this.state.post.errors.address) {
-      return (
-        <div className="inline-error alert alert-danger">
-          {this.state.post.errors.address.join(', ')}
-        </div>
-      );
-    } else {
-      return null;
-    }
   }
 
   handleCancel() {

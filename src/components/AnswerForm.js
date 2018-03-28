@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 function AnswerForm (props) {
   // props.onSubmit
@@ -23,18 +24,19 @@ function AnswerForm (props) {
       className="AnswerForm"
       onSubmit={handleSubmit}
     >
-      <div>
-        <label htmlFor="body">Your Answer</label> <br />
-        <input name="body" id="body" />
-      </div>
+
+      <FormGroup>
+        <Label htmlFor="body">Message</Label>
+        <Input style={{ fontSize: 15 }} type="textarea" name="body" id="body" placeholder="Type message here" />
+      </FormGroup>
+
+      <FormGroup>
+       <Label htmlFor="contact">Contact Info</Label>
+       <Input style={{ fontSize: 15 }} type="contact" name="contact" id="contact" placeholder="Phone Number or Email Address" />
+     </FormGroup>
 
       <div>
-        <label htmlFor="contact">Contact</label> <br />
-        <textarea name="contact" id="contact" cols="60" rows="4" />
-      </div>
-
-      <div>
-        <input type="submit" value="Submit"/>
+        <Button outline color="primary" style={{ fontSize: 15 }} input type="submit"> Submit </Button>
       </div>
     </form>
   )

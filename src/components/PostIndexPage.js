@@ -1,3 +1,5 @@
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Field from './Field';
@@ -15,7 +17,8 @@ class PostIndexPage extends React.Component {
 
     this.state = {
       posts: [],
-      loading: true
+      loading: true,
+      collapse: false
     }
 
     // When using a method as a callback, we must bind
@@ -25,6 +28,7 @@ class PostIndexPage extends React.Component {
     // `.bind()` is a method of functions that effectively
     // creates new function that is copy of the function
     // where `this` is bound permanently.
+    this.toggle = this.toggle.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.addPost = this.addPost.bind(this);
     this.updatePosts = this.updatePosts.bind(this);
@@ -57,13 +61,10 @@ class PostIndexPage extends React.Component {
       posts: posts
         .filter(post => post.id !== postId)
     })
-    // Everytime you want to change the state, use the this.setState()
-    // method. This will notify React that it potentially needs
-    // to update the DOM based on the new data in the state.
 
-    // Modifying this.state directly will cause headaches and not
-    // reflect any changes to the DOM.
-    // DO NOT DO IT! 😱
+    Post
+    .delete(postId)
+    this.props.history.push(`/posts`)
   }
 
   addPost (newPost) {
@@ -79,15 +80,24 @@ class PostIndexPage extends React.Component {
     })
   }
 
+  handleEdit(postId) {
+  this.props.history.push(`/posts/${postId}/edit`);
+  }
+
   updatePosts (posts){
     this.setState({
       posts: posts
     })
   }
 
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
+  }
+
+
   render () {
     const { posts, loading } = this.state;
-    // console.log('post', posts)
+    const { user } = this.props;
 
     if (loading) {
       return (
@@ -102,39 +112,69 @@ class PostIndexPage extends React.Component {
     }
 
 
-
     return (
-      <main
-        className="PostIndexPage"
-        style={{margin: '0 1rem'}}
-        >
-          <h2>Posts</h2>
-          <SearchBox updatePosts={this.updatePosts}/>
-          <ul>
-            {
-              posts.map(
-                post => (
-                    <li key={post.id}>
-                  <CarouselIndexPage
-                    images ={post.albums}
-                  />
-                    <Link to={`/posts/${post.id}`}>
-                      {post.title}
-                    </Link>
-                    <Field name="Author" value={post.author.full_name} />
-                    <Field name="Location" value={post.address} />
-                    <button
-                      data-id={post.id}
-                      onClick={this.deletePost}
-                    >Delete</button>
-                  </li>
+        <Container fluid>
+          <main>
+
+            <Button className="ml-5" outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
+            <Collapse isOpen={this.state.collapse}>
+              <Card>
+                <CardBody>
+                  <SearchBox updatePosts={this.updatePosts}/>
+                </CardBody>
+              </Card>
+            </Collapse>
 
 
-                )
-              )
-            }
-          </ul>
-        </main>
+          {/* <h2>Posts</h2> */}
+          <CardDeck className="indexCard">
+            <Row>
+              <ul>
+                {
+                  posts.map(
+                    post => (
+                      <Col key={post.id} lg="3" md="4" sm="6" xs="12">
+                        <p key={post.id}>
+                      <Card className="card">
+                        <CarouselIndexPage
+                        images ={post.albums}
+                      />
+                      <CardBody>
+                        <CardTitle>
+                        <Link style={{fontSize: 20}} to={`/posts/${post.id}`}>
+                          {post.title}
+                        </Link>
+                        </CardTitle>
+                        {/* <Field name="Author" value={post.author.full_name} /> */}
+                        <Field name="Location" value={post.address} />
+                        {/* <p>{post.author.id}</p>
+                        <p>{user.id}</p> */}
+                        {post.author.id === user.id ?
+                          <div>
+                          <Button color="danger"
+                            data-id={post.id}
+                            onClick={this.deletePost}
+                            >Delete</Button>
+                            <Button
+                              onClick={e => this.handleEdit(post.id)}
+                              className="btn btn-secondary ml-3">
+                              Edit
+                            </Button>
+                          </div>
+                          : ''}
+                        </CardBody>
+                      </Card>
+                    </p>
+                    </Col>
+                    )
+                  )
+                }
+              </ul>
+            </Row>
+          </CardDeck>
+      </main>
+    </Container>
+
       )
   }
 }

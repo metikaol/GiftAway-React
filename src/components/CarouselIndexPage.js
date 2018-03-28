@@ -1,4 +1,6 @@
 import React from 'react';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
 import Carousel from 'nuka-carousel';
 import Mypic from './gifticon.png';
 const DOMAIN = 'http://localhost:3000';
@@ -14,9 +16,9 @@ export default class CarouselIndexPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.images)
+    // console.log(this.props.images)
     const { images } = this.props
-    console.log('image',images)
+    // console.log('image',images)
 
     if(images.length < 1){
       return (
@@ -32,7 +34,7 @@ export default class CarouselIndexPage extends React.Component {
           {
             images.map(
               image => (
-                  <img  width="250px" height="250px" src={`${DOMAIN}${image.photo_url}`} />
+                  <img key={image.id} width="250px" height="250px" src={`${DOMAIN}${image.photo_url}`} />
               )
             )
           }

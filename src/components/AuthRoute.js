@@ -19,8 +19,8 @@ function AuthRoute (props) {
     <Route
       {...restProps}
       render={
-        props => isAuthenticated ? (
-          <Component {...props} />
+        routeProps => isAuthenticated ? (
+          <Component {...routeProps} {...props} />
           // React.createElement(Component,{ ...props})
         ) : (
           <Redirect to="/sign_in" />

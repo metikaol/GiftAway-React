@@ -1,3 +1,4 @@
+import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import SearchBox from './SearchBox';
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap } from 'react-google-maps'
@@ -6,14 +7,25 @@ import { Maps } from '../lib/requests';
 const DOMAIN = 'http://localhost:3000';
 
 
-const GiftAwayMap = withGoogleMap(props => (
+
+
+
+
+const GiftAwayMap = withGoogleMap(props => {
+  return (
   <GoogleMap
     ref={props.onMapMounted}
     onZoomChanged={props.handleMapChanged}
     onDragEnd={props.handleMapChanged}
     onBoundsChanged={props.handleMapFullyLoaded}
     defaultCenter={props.center}
-    defaultZoom={props.zoom}>
+    defaultZoom={props.zoom}
+    center={{
+      lat: props.center.lat,
+      lng: props.center.lng,
+    }}
+    >
+
 
     {
       props.places.length > 0 && props.places.map(place => (
@@ -27,7 +39,7 @@ const GiftAwayMap = withGoogleMap(props => (
       ))
     }
   </GoogleMap>
-));
+)});
 
 class Map extends Component {
   constructor(props) {
@@ -42,15 +54,21 @@ class Map extends Component {
 
     this.state = {
       places: [],
-      lat: 49.246292,
-      lng: -123.116226
+      center: {
+        lat: 49.246292,
+        lng: -123.116226
+      },
+      collapse: false
     };
+    this.toggle = this.toggle.bind(this);
+  }
+    toggle() {
+      this.setState({ collapse: !this.state.collapse });
   }
 
   handleMapChanged() {
     this.getMapBounds()
     this.setMapCenterPoint()
-    this.fetchPlacesFromApi()
   }
 
   handleMapMounted(map) {
@@ -63,12 +81,15 @@ class Map extends Component {
 
     this.mapFullyLoaded = true
     this.handleMapChanged()
+    this.fetchPlacesFromApi()
   }
 
   setMapCenterPoint() {
     this.setState({
+      center: {
       lat: this.map.getCenter().lat(),
       lng: this.map.getCenter().lng()
+      }
     })
   }
 
@@ -86,9 +107,13 @@ class Map extends Component {
       .catch((response)=> console.log(response))
   }
 
-  updatePosts (posts){
+  updatePosts (posts, latLng){
     this.setState({
-      places: posts
+      places: posts,
+        center: {
+          lat: latLng ? latLng.lat : this.state.center.lat,
+          lng: latLng ? latLng.lng : this.state.center.lng,
+        },
     })
   }
 
@@ -105,16 +130,27 @@ class Map extends Component {
     this.yMapBounds.max = yMapBounds.b
   }
 
-
   render() {
-    const {lat, lng, places} = this.state;
+    const { places } = this.state;
 
     return(
-      <div style={{width: `750px`, height: `750px`}}>
-        <SearchBox updatePosts={this.updatePosts.bind(this)}/>
+      <div style={{width: `1200px`, height: `550px`, marginLeft: "125px"}}>
+
+        <div>
+          <Button outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
+          <Collapse isOpen={this.state.collapse}>
+            <Card>
+              <CardBody>
+                <SearchBox updatePosts={this.updatePosts.bind(this)}/>
+              </CardBody>
+            </Card>
+          </Collapse>
+        </div>
+
+
         {/* <ul>
-          <li>lng: {lng}</li>
-          <li>lat: {lat}</li>
+          <li>lng: {this.state.center.lng}</li>
+          <li>lat: {this.state.center.lat}</li>
           <li>xMapBounds.min: {this.xMapBounds.min}</li>
           <li>xMapBounds.max: {this.xMapBounds.max}</li>
           <li>yMapBounds.min: {this.yMapBounds.min}</li>
@@ -125,10 +161,9 @@ class Map extends Component {
           onMapMounted={this.handleMapMounted.bind(this)}
           handleMapChanged={this.handleMapChanged.bind(this)}
           handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}
-          center={{
-            lat: lat,
-            lng: lng
-          }}
+          center={{lat: this.state.center.lat,
+                   lng: this.state.center.lng
+                 }}
           places={places}
           zoom={this.zoom}
           containerElement={

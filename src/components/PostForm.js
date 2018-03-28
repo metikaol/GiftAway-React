@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import axiosClient from '../lib/axiosClient';
 import './Index.css';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import FormErrors from './FormErrors';
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.onChangeAddress = (address) => {
-      console.log('address', this.state)
       this.setState({ post: Object.assign(this.state.post, { address: address }) });
+
     }
     this.state = {
       selectedPostCoverFiles: [],
@@ -28,13 +29,8 @@ class PostForm extends Component {
   componentWillMount() {
     if (this.props.match.params.id) {
       axiosClient.get(`/posts/${this.props.match.params.id}`).then(response => {
-        // if (!response.ok) {
-        //   console.log('inside error', response.);
-        //   //handler errors
-        // } else {
-          // console.log(response.data);
           this.setState({
-            selectedPostCoverFiles: response.data.cover_photos,
+            selectedPostCoverFiles: response.data.albums,
             post: {
               id: response.data.id,
               title: response.data.title,
@@ -43,7 +39,6 @@ class PostForm extends Component {
               errors: {}
             }
           });
-        // }
       });
     }
   }
@@ -55,29 +50,31 @@ class PostForm extends Component {
   }
 
   render() {
+    const { errors=[] } = this.state.post.errors
+
     return (
       <div className="PostForm">
         <form>
           <div className="form-group">
             <label>Title</label>
-            <input
+            <input style={{ fontSize: 15}}
               type="text"
               onChange={e => this.handlePostTitleChange(e)}
               value={this.state.post.title}
               className="form-control"
             />
-            {this.renderPostTitleInlineError()}
+            <FormErrors forField="title" errors={errors} />
           </div>
 
           <div className="form-group">
             <label>Description</label>
-            <textarea
+            <textarea style={{ fontSize: 15}}
               type="text"
               onChange={e => this.handlePostDescriptionChange(e)}
               value={this.state.post.body}
               className="form-control"
             />
-            {this.renderPostDescriptionInlineError()}
+            <FormErrors forField="body" errors={errors} />
           </div>
 
           <div className="form-group">
@@ -86,7 +83,7 @@ class PostForm extends Component {
                   value: this.state.post.address,
                   onChange: this.onChangeAddress,
                 }}/>
-            {this.renderPostAddressInlineError()}
+            <FormErrors forField="address" errors={errors} />
           </div>
 
           <div className="form-group">
@@ -98,14 +95,14 @@ class PostForm extends Component {
           <button
             disabled={this.state.isSubmittingForm}
             onClick={e => this.handleFormSubmit()}
-            className="btn btn-primary">
+            className="btn btn-outline-primary btn-lg ">
             {this.state.isSubmittingForm ? 'Saving...' : 'Save'}
           </button>
           &nbsp;
           <button
             disabled={this.state.isSubmittingForm}
             onClick={e => this.handleCancel()}
-            className="btn btn-default">
+            className="btn btn-outline-secondary btn-lg">
             Cancel
           </button>
         </form>
@@ -114,12 +111,7 @@ class PostForm extends Component {
     );
   }
 
-  // <input
-  //   type="text"
-  //   onChange={e => this.handlePostAddressChange(e)}
-  //   value={this.state.post.address}
-  //   className="form-control"
-  // />
+
 
   renderUploadCoversButton() {
     let numberOfSelectedCovers = this.getNumberOfSelectedFiles();
@@ -146,7 +138,7 @@ class PostForm extends Component {
         />
         <label
           disabled={this.state.isSubmittingForm}
-          className="btn btn-success"
+          className="btn btn-primary"
           htmlFor="post_covers">
           <span className="glyphicon glyphicon-cloud-upload" />
           &nbsp; &nbsp;
@@ -165,13 +157,12 @@ class PostForm extends Component {
       if (el._destroy) {
         return null;
       }
-
       return (
         <li key={index}>
           <div className="photo">
             <img
               width={150}
-              src={el.id ? el.url : URL.createObjectURL(el)}
+              src={el.id ? "http://localhost:3000/"+el.photo_url : URL.createObjectURL(el)}
               style={{ alignSelf: 'center' }}
             />
             <div
@@ -260,47 +251,9 @@ class PostForm extends Component {
   }
 
   handlePostAddressChange(e) {
-    console.log(e.target)
     let { post } = this.state;
     post.address = e.target.value;
     this.setState({ post: post });
-  }
-
-
-  renderPostTitleInlineError() {
-    if (this.state.post.errors.title) {
-      return (
-        <div className="inline-error alert alert-danger">
-          {this.state.post.errors.title.join(', ')}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  renderPostDescriptionInlineError() {
-    if (this.state.post.errors.body) {
-      return (
-        <div className="inline-error alert alert-danger">
-          {this.state.post.errors.body.join(', ')}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  renderPostAddressInlineError() {
-    if (this.state.post.errors.address) {
-      return (
-        <div className="inline-error alert alert-danger">
-          {this.state.post.errors.address.join(', ')}
-        </div>
-      );
-    } else {
-      return null;
-    }
   }
 
   handleCancel() {

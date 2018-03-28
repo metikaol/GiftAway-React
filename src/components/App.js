@@ -12,7 +12,11 @@ import Map from './Map';
 import PostShowPage from './PostShowPage';
 import PostIndexPage from './PostIndexPage';
 import PostNewPage from './PostNewPage';
+import PostEditPage from './PostEditPage';
 import SignInPage from './SignInPage';
+import SignUpPage from './SignUpPage';
+import NotFoundPage from './NotFoundPage';
+import HomePage from './HomePage';
 import NavBar from './NavBar';
 import AuthRoute from './AuthRoute';
 import SearchBox from './SearchBox';
@@ -74,8 +78,10 @@ class App extends Component {
             only the first Route that matches will be rendered.
           */}
           <Switch>
+            <Route exact path="/" component={HomePage} />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
+              user={user}
               exact
               path="/posts" component={PostIndexPage}
             />
@@ -83,6 +89,11 @@ class App extends Component {
               isAuthenticated={this.isSignedIn()}
               path="/posts/new"
               component={PostNewPage}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              path="/posts/:id/edit"
+              component={PostEditPage}
             />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
@@ -107,10 +118,15 @@ class App extends Component {
                   <SignInPage
                     {...props}
                     onSignIn={this.signIn}
-                  />
+                    />
                 )
               }
             />
+            <Route
+              path="/sign_up"
+              render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
+            />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </Router>

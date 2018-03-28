@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PostForm from './PostForm';
 
 
-class PostNewPage extends Component {
+class PostEditPage extends Component {
   render() {
   return (
-    <div className="col-md-8 col-md-offset-2">
+    <div className="PostEdit col-md-8 col-md-offset-2">
       <br/>
       <PostForm history={this.props.history} match={this.props.match} />
     </div>
@@ -13,4 +13,4 @@ class PostNewPage extends Component {
   }
 }
 
-export default PostNewPage;
+export default PostEditPage;

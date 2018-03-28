@@ -147,7 +147,8 @@ class PostIndexPage extends React.Component {
                         </CardTitle>
                         {/* <Field name="Author" value={post.author.full_name} /> */}
                         <Field name="Location" value={post.address} />
-
+                        {/* <p>{post.author.id}</p>
+                        <p>{user.id}</p> */}
                         {post.author.id === user.id ?
                           <div>
                           <Button color="danger"

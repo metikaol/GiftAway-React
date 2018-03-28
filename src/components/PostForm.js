@@ -29,13 +29,8 @@ class PostForm extends Component {
   componentWillMount() {
     if (this.props.match.params.id) {
       axiosClient.get(`/posts/${this.props.match.params.id}`).then(response => {
-        // if (!response.ok) {
-        //   console.log('inside error', response.);
-        //   //handler errors
-        // } else {
-          // console.log(response.data);
           this.setState({
-            selectedPostCoverFiles: response.data.cover_photos,
+            selectedPostCoverFiles: response.data.albums,
             post: {
               id: response.data.id,
               title: response.data.title,
@@ -44,7 +39,6 @@ class PostForm extends Component {
               errors: {}
             }
           });
-        // }
       });
     }
   }
@@ -57,6 +51,7 @@ class PostForm extends Component {
 
   render() {
     const { errors=[] } = this.state.post.errors
+
     return (
       <div className="PostForm">
         <form>
@@ -162,13 +157,12 @@ class PostForm extends Component {
       if (el._destroy) {
         return null;
       }
-
       return (
         <li key={index}>
           <div className="photo">
             <img
               width={150}
-              src={el.id ? el.url : URL.createObjectURL(el)}
+              src={el.id ? "http://localhost:3000/"+el.photo_url : URL.createObjectURL(el)}
               style={{ alignSelf: 'center' }}
             />
             <div

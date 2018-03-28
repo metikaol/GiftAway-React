@@ -1,4 +1,4 @@
-import { Card, CardImg, CardText, CardBody,CardFooter,
+import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -80,6 +80,10 @@ class PostIndexPage extends React.Component {
     })
   }
 
+  handleEdit(postId) {
+  this.props.history.push(`/posts/${postId}/edit`);
+  }
+
   updatePosts (posts){
     this.setState({
       posts: posts
@@ -145,13 +149,19 @@ class PostIndexPage extends React.Component {
                         <Field name="Location" value={post.address} />
 
                         {post.author.id === user.id ?
-                          <Button
+                          <div>
+                          <Button color="danger"
                             data-id={post.id}
                             onClick={this.deletePost}
                             >Delete</Button>
+                            <Button
+                              onClick={e => this.handleEdit(post.id)}
+                              className="btn btn-secondary ml-3">
+                              Edit
+                            </Button>
+                          </div>
                           : ''}
                         </CardBody>
-                        {/* <CardFooter>Footer</CardFooter> */}
                       </Card>
                     </p>
                     </Col>

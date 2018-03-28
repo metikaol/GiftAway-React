@@ -12,6 +12,7 @@ import Map from './Map';
 import PostShowPage from './PostShowPage';
 import PostIndexPage from './PostIndexPage';
 import PostNewPage from './PostNewPage';
+import PostEditPage from './PostEditPage';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
 import NotFoundPage from './NotFoundPage';
@@ -88,6 +89,11 @@ class App extends Component {
               isAuthenticated={this.isSignedIn()}
               path="/posts/new"
               component={PostNewPage}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              path="/posts/:id/edit"
+              component={PostEditPage}
             />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}

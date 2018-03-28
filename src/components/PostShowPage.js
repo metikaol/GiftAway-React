@@ -30,7 +30,6 @@ class PostShowPage extends Component {
     };
 
     this.toggle = this.toggle.bind(this);
-    this.delete = this.delete.bind(this);
     this.deleteAnswer = this.deleteAnswer.bind(this);
     this.createAnswer.bind(this);
   }
@@ -48,12 +47,6 @@ class PostShowPage extends Component {
           })
         }
       )
-  }
-
-  delete () {
-    this.setState({
-      post: {}
-    });
   }
 
   deleteAnswer (answerId) {
@@ -104,7 +97,7 @@ class PostShowPage extends Component {
     if (loading) {
       return (
         <main
-          className="PostShowPage"
+          className="PostShowPage d-flex align-items-center justify-content-center"
           style={{
             margin: '0 1rem'
           }}
@@ -117,7 +110,7 @@ class PostShowPage extends Component {
     if (!post.id) {
       return (
         <main
-          className="PostShowPage"
+          className="PostShowPage d-flex align-items-center justify-content-center"
           style={{
             margin: '0 1rem'
           }}
@@ -152,13 +145,6 @@ class PostShowPage extends Component {
             images={post.albums}
           />
           <PostDetails {...post} />
-          <button
-            onClick={this.delete}
-          >
-            Delete
-          </button>
-          <br/>
-          <br/>
 
           <Button outline color="primary" style={{ fontSize: 15}} onClick={this.toggle}>{this.props.buttonLabel}Contact Donator</Button>
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>

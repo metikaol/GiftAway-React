@@ -107,6 +107,17 @@ const Post = {
       }
     )
       .then(res => res.json())
+  },
+  delete (id) {
+    return fetch(
+      `${BASE_URL}/posts/${id}`,
+      {
+        headers: {
+          'Authorization': getJWT(),
+        },
+        method: 'DELETE'
+      }
+    )
   }
 }
 

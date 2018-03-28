@@ -61,13 +61,10 @@ class PostIndexPage extends React.Component {
       posts: posts
         .filter(post => post.id !== postId)
     })
-    // Everytime you want to change the state, use the this.setState()
-    // method. This will notify React that it potentially needs
-    // to update the DOM based on the new data in the state.
 
-    // Modifying this.state directly will cause headaches and not
-    // reflect any changes to the DOM.
-    // DO NOT DO IT! 😱
+    Post
+    .delete(postId)
+    this.props.history.push(`/posts`)
   }
 
   addPost (newPost) {
@@ -96,7 +93,7 @@ class PostIndexPage extends React.Component {
 
   render () {
     const { posts, loading } = this.state;
-    // console.log('post', posts)
+    const { user } = this.props;
 
     if (loading) {
       return (
@@ -126,16 +123,15 @@ class PostIndexPage extends React.Component {
 
 
           {/* <h2>Posts</h2> */}
-          <CardDeck>
+          <CardDeck className="indexCard">
             <Row>
-
               <ul>
                 {
                   posts.map(
                     post => (
-                      <Col key={post.id} sm="3">
-                        <li key={post.id}>
-                        <Card style={{width: "253px", hight: "400px"}}>
+                      <Col key={post.id} lg="3" md="4" sm="6" xs="12">
+                        <p key={post.id}>
+                      <Card className="card">
                         <CarouselIndexPage
                         images ={post.albums}
                       />
@@ -147,14 +143,17 @@ class PostIndexPage extends React.Component {
                         </CardTitle>
                         {/* <Field name="Author" value={post.author.full_name} /> */}
                         <Field name="Location" value={post.address} />
-                        <Button
-                          data-id={post.id}
-                          onClick={this.deletePost}
-                        >Delete</Button>
+
+                        {post.author.id === user.id ?
+                          <Button
+                            data-id={post.id}
+                            onClick={this.deletePost}
+                            >Delete</Button>
+                          : ''}
                         </CardBody>
-                        <CardFooter>Footer</CardFooter>
+                        {/* <CardFooter>Footer</CardFooter> */}
                       </Card>
-                      </li>
+                    </p>
                     </Col>
                     )
                   )

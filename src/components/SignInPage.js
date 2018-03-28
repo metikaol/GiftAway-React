@@ -57,12 +57,11 @@ class SignInPage extends Component {
           )
         }
 
-        <br/><br/><br/><br/>
-        <br/><br/><br/><br/>
-        <br/><br/><br/><br/>
+
         <Container style={{height: "500px"}}>
         <Row style={{height: "100%"}}>
-        <Col sm="12" md={{ size: 8, offset: 3 }}>
+        {/* <Col sm="12" md={{ size: 8, offset: 3 }}> */}
+        <Col className="d-flex align-items-center justify-content-center">
         <Form inline onSubmit={this.createToken}>
           <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
             <Label style={{fontSize: 20, marginRight: 3}} htmlFor='email' hidden>Email</Label> <br />

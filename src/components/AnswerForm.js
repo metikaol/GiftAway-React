@@ -32,7 +32,7 @@ function AnswerForm (props) {
 
       <FormGroup>
        <Label htmlFor="contact">Contact Info</Label>
-       <Input style={{ fontSize: 15 }} type="contact" name="contact" id="contact" placeholder="Contact Number or Email Address" />
+       <Input style={{ fontSize: 15 }} type="contact" name="contact" id="contact" placeholder="Phone Number or Email Address" />
      </FormGroup>
 
       <div>

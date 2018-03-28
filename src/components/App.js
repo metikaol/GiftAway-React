@@ -80,6 +80,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
+              user={user}
               exact
               path="/posts" component={PostIndexPage}
             />

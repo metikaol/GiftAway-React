@@ -1,6 +1,7 @@
 import React from 'react';
 import Field from './Field';
 import { Jumbotron, Container } from 'reactstrap';
+import TimeAgo from 'react-timeago'
 
 
 function PostDetails (props) {
@@ -13,8 +14,9 @@ function PostDetails (props) {
           <Container>
             <h1 className="display-3">{props.title}</h1>
             <p className="lead">{props.body}</p>
-            Field name="Posted" value={props.created_at} />
+            <Field name="Posted" value={props.created_at} />
             <p>By {author.first_name}</p>
+            <TimeAgo date={props.created_at} />
           </Container>
         </Jumbotron>
       </div>

@@ -19,7 +19,8 @@ function SignUpPage(props) {
         const jwt = data.jwt;
         localStorage.setItem('jwt', jwt);
         onSignUp();
-        props.history.push('/');
+        props.history.push('/posts');
+        window.location.reload()
       }
     });
   }

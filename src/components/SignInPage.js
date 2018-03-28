@@ -33,7 +33,8 @@ class SignInPage extends Component {
           // because this component is rendered by a
           // route component.
           // (i.e. <Route route="/sign_in" component={SignInPage} />)
-          this.props.history.push('/');
+          this.props.history.push('/posts');
+          window.location.reload()
         } else {
           this.setState({
             errors: [{
@@ -56,7 +57,6 @@ class SignInPage extends Component {
             (e, i) => <Alert  color="danger" className="alert" key={i}>{e.message}</Alert>
           )
         }
-
 
         <Container style={{height: "500px"}}>
         <Row style={{height: "100%"}}>

@@ -11,6 +11,7 @@ class PostForm extends Component {
       this.setState({ post: Object.assign(this.state.post, { address: address }) });
 
     }
+
     this.state = {
       selectedPostCoverFiles: [],
       submitFormProgress: 0,

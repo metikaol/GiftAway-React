@@ -24,7 +24,6 @@ const Maps = {
 
 const User = {
   create(params) {
-    debugger
     return fetch(`${BASE_URL}/users`, {
       method: 'POST',
       headers: {

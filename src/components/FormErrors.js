@@ -10,7 +10,12 @@ function FormErrors (props) {
   let filteredErrors;
   if (forField) {
     filteredErrors = errors.filter(
-      e => e.field.toLowerCase() === forField.toLowerCase()
+      e => {
+        if (e.field){
+          return e.field.toLowerCase() === forField.toLowerCase()
+        }
+        return;
+      }
     )
   } else {
     filteredErrors = errors;

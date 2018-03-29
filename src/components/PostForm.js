@@ -200,8 +200,6 @@ class PostForm extends Component {
           }
           role="progressbar"
           aria-valuenow={this.state.submitFormProgress}
-          areaValuemin="0"
-          areaValuemax="100"
           style={{ width: this.state.submitFormProgress + '%' }}>
           {this.state.submitFormProgress}% Complete
         </div>
@@ -287,14 +285,20 @@ class PostForm extends Component {
     return formData;
   }
 
+  getJWT(){
+    console.log("I am called NOW. localStorage.getItem('jwt') >>>", localStorage.getItem('jwt'));
+
+    return localStorage.getItem('jwt');
+  }
+
   submitForm() {
+    const _this = this;
     let submitMethod = this.state.post.id ? 'patch' : 'post';
     let url = this.state.post.id
       ? `/posts/${this.state.post.id}.json`
       : '/posts.json';
 
-    axiosClient
-      [submitMethod](url, this.buildFormData(), {
+    axiosClient[submitMethod](url, this.buildFormData(), {
         onUploadProgress: progressEvent => {
           let percentage = progressEvent.loaded * 100.0 / progressEvent.total;
           this.setState({

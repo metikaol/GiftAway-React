@@ -12,6 +12,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+  import map_icon from './Map_icon.png';
 
 function NavBar (props) {
   const { user, onSignOut = () => {} } = props;
@@ -22,13 +23,15 @@ function NavBar (props) {
 
   return (
     // <Nav className="NavBar">
-      <Navbar  className="navbar navbar-dark bg-primary" color="faded" light expand>
+      <Navbar  className="navbar navbar-dark bg-secondary" expand>
 
-      <NavLink style={{color: "white", fontSize: 20}} exact to="/posts">GiftAway</NavLink>
+      <NavLink style={{color: "white", fontSize: 20}} exact to="/posts" >GiftAway</NavLink>
+
+      <NavLink exact to="/map"><img class="navbar-brand" src={map_icon} alt="logo"/></NavLink>
+
 
       <Nav className="ml-auto" navbar style={{color: "white", fontSize: 20, padding: 4}}>
 
-      <NavLink className="mr-4" style={{color: "white", fontSize: 20 }} exact to="/map">Map</NavLink>
       <NavLink className="mr-4" style={{color: "white", fontSize: 20}} exact to="/posts/new">New Item</NavLink>
       {user
         ? [

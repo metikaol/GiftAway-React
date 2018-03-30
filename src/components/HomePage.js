@@ -44,7 +44,8 @@ class HomePage extends Component {
 
   render() {
     const {errors} = this.state;
-    return (<section id="cover" className="HomePage"
+    return (
+      <section id="cover" className="HomePage"
       // style={{margin: '0 1rem'}}
 >
 
@@ -53,10 +54,15 @@ class HomePage extends Component {
           <div className="col-sm-10 col-sm-offset-1">
             {errors.map((e, i) => <Alert color="danger" className="alert" key={i}>{e.message}</Alert>)}
             <h1 className="display-1">
-              Welcome to GiftAway</h1>
-            <h1 className="display-2">
               <em>
+              Welcome to GiftAway
+              </em>
+            </h1>
+            <h1 className="display-1" style={{ fontSize: 80 }}>
+              <em>
+                <strong>
                 Space for giving !!
+              </strong>
               </em>
             </h1>
 

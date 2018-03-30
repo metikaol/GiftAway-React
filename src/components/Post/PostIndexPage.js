@@ -115,10 +115,10 @@ class PostIndexPage extends React.Component {
 
 
     return (
-          <main className="container">
+          <main className="container mt-3">
 
 
-            <Button className="ml-5" outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
+            <Button className="ml-3" outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
             <Collapse isOpen={this.state.collapse}>
               <Card>
                 <CardBody>

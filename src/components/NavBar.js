@@ -21,8 +21,8 @@ function NavBar (props) {
   }
 
   return (
-    // <Nav className="NavBar">
-      <Navbar  className=" navbar navbar-dark bg-info sticky-top mb-0" expand>
+
+      <Navbar className="navbar navbar-light bg-info sticky-top mb-0" expand>
 
       <NavLink style={{color: "white", fontSize: 20}} exact to="/posts" >GiftAway</NavLink>
 

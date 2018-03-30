@@ -35,6 +35,9 @@
   box-shadow: 10px 10px 5px grey;
 }
 
+/* .navbar {
+  display: none ;
+} */
 /*
 .indexCard .card {
   width: 253px;
@@ -48,7 +51,9 @@
   /* overflow: scroll;
 } */
 
-
+.SignUp input{
+  font-size: 17px;
+}
 
 .FormErrors {
   color: red;
@@ -63,10 +68,6 @@ body {
   /* background-color: #825201; */
 }
 
-
-.SignInPage ~ .navbar{
-  display: none;
-}
 
 #cover {
   background-image: url('./images/bg.jpg');

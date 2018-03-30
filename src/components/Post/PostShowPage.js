@@ -111,8 +111,9 @@ class PostShowPage extends Component {
     // 1rem is == to the font-size of the root tag (<html> ...).
     return (<main className="PostShowPage container mx-auto" style={{
         margin: '0 1rem',
-        width: "500px",
-        height: 'auto'
+        width: "600px",
+        height: 'auto',
+        marginTop: "15px"
       }}>
       <br/>
       <CarouselIndexPage images={post.albums}/>

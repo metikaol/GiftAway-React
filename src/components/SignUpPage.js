@@ -46,8 +46,8 @@ class SignUpPage extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="SignUp container">
-        <h1>Sign Up</h1>
+      <div className="SignUp container mt-5">
+        <h1 className="mt-5 mb-4">Create Account</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="first_name">First Name</label>

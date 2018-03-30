@@ -2,11 +2,11 @@ import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck, CardFooter } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Field from './Field';
-import { Post } from '../lib/requests';
+import Field from '../Field';
+import { Post } from '../../lib/requests';
 import CarouselIndexPage from './CarouselIndexPage';
-import SearchBox from './SearchBox';
-import LocationIcon from './location_icon.png';
+import SearchBox from '../Search/SearchBox';
+import LocationIcon from '../../images/location_icon.png';
 import TimeAgo from 'react-timeago'
 
 

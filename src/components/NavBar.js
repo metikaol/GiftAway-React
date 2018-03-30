@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import CurrentDateTime from './CurrentDateTime';
 import {
   Collapse,
   Navbar,
@@ -12,7 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-  import map_icon from './Map_icon.png';
+  import map_icon from '../images/Map_icon.png';
 
 function NavBar (props) {
   const { user, onSignOut = () => {} } = props;
@@ -48,10 +47,8 @@ function NavBar (props) {
               Sign Up
             </NavLink>
           ]}
-      {/* <CurrentDateTime /> */}
        </Nav>
     </Navbar>
-    // </Nav>
   )
 }
 

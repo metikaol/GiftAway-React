@@ -1,5 +1,6 @@
 import React from 'react';
 import Field from '../Field';
+import TimeAgo from 'react-timeago'
 
 function AnswerDetails (props) {
   const {onDeleteClick = () => {}} = props;
@@ -14,17 +15,16 @@ function AnswerDetails (props) {
       className="AnswerDetails"
       style={style}
     >
-      <p>{props.body}</p>
+      <p>Message: {props.body}</p>
+      <p>Contact Info: {props.contact}</p>
       <p>By {props.author_full_name}</p>
-      <Field name="Created At" value={props.created_at} />
-      <button
+      <TimeAgo date={props.created_at} />
+      <br/>
+      <button className="btn btn-outline-danger"
         onClick={() => onDeleteClick(props.id)}
       >Delete</button>
+      <hr/>
     </div>
-    // <div></div>
-    // You can't return multiple React elements at once.
-    // If you want to return, they must nested inside
-    // a single React element.
   )
 }
 

@@ -54,6 +54,17 @@ const Answer = {
       }
     )
       .then(res => res.json())
+  },
+  delete (id) {
+    return fetch(
+      `${BASE_URL}/answers/${id}`,
+      {
+        headers: {
+          'Authorization': getJWT(),
+        },
+        method: 'DELETE'
+      }
+    )
   }
 }
 

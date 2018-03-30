@@ -58,6 +58,9 @@ class PostShowPage extends Component {
         answers: answers.filter(answer => answer.id !== answerId)
       }
     })
+
+    Answer
+    .delete(answerId)
   }
 
   createAnswer(params, id) {
@@ -127,14 +130,17 @@ class PostShowPage extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
           <ModalBody>
-            <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/> {/* <AnswerList
-                answers={post.answers}
-                onAnswerDeleteClick={this.deleteAnswer}
-              /> */
-            }
+            <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
+
           </ModalBody>
         </Modal>
+
       </Jumbotron>
+
+      <AnswerList
+        answers={post.answers}
+        onAnswerDeleteClick={this.deleteAnswer}
+      />
 
     </main>)
   }

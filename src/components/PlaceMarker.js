@@ -23,7 +23,7 @@ class PlaceMarker extends Component {
 
   render() {
     const {showTooltip} = this.state
-    const {lat, lng, title, id, albums} = this.props
+    const {lat, lng, title, id, albums, created_at} = this.props
 
     return(
       <Marker
@@ -38,6 +38,7 @@ class PlaceMarker extends Component {
                               id={id}
                            title={title}
                            albums={albums}
+                           created_at={created_at}
                            closeWindow={this.closeWindow.bind(this)}/>
           )}
       </Marker>

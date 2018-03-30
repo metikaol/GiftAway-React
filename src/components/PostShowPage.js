@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { InfoWindow } from 'react-google-maps'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Jumbotron } from 'reactstrap';
 
 
 // React is default import.
@@ -125,38 +125,35 @@ class PostShowPage extends Component {
 
     // 1rem is == to the font-size of the root tag (<html> ...).
     return (
-      // <InfoWindow
-      //   onCloseClick={this.props.closeWindow}>
-      //     <div>
-      //       <Link to={`/posts/${post.id}`}>
-      //         {post.title}
-      //       </Link>
-      //     </div>
-      //   </InfoWindow>
-
 
       <main
-        className="PostShowPage"
+        className="PostShowPage container mx-auto"
         style={{
-          margin: '0 1rem'
+          margin: '0 1rem',
+          width: "500px",
+          height: 'auto'
         }}
         >
+        <br/>
           <CarouselIndexPage
             images={post.albums}
           />
+
+          <Jumbotron>
           <PostDetails {...post} />
 
           <Button outline color="primary" style={{ fontSize: 15}} onClick={this.toggle}>{this.props.buttonLabel}Contact Donator</Button>
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
-            <ModalBody>
-              <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
-          {/* <AnswerList
-            answers={post.answers}
-            onAnswerDeleteClick={this.deleteAnswer}
-          /> */}
-        </ModalBody>
-      </Modal>
+                <ModalBody>
+                  <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
+              {/* <AnswerList
+                answers={post.answers}
+                onAnswerDeleteClick={this.deleteAnswer}
+              /> */}
+              </ModalBody>
+            </Modal>
+          </Jumbotron>
 
         </main>
       )

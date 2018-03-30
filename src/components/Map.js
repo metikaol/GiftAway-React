@@ -35,6 +35,7 @@ const GiftAwayMap = withGoogleMap(props => {
                      lng={place.longitude}
                      title={place.title}
                      albums={place.albums}
+                     created_at={place.created_at}
                      />
       ))
     }

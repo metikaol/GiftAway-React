@@ -23,11 +23,11 @@ function NavBar (props) {
 
   return (
     // <Nav className="NavBar">
-      <Navbar  className="navbar navbar-dark bg-secondary" expand>
+      <Navbar  className=" navbar navbar-dark bg-info sticky-top mb-0" expand>
 
       <NavLink style={{color: "white", fontSize: 20}} exact to="/posts" >GiftAway</NavLink>
 
-      <NavLink exact to="/map"><img class="navbar-brand" src={map_icon} alt="logo"/></NavLink>
+      <NavLink exact to="/map"><img className="navbar-brand" src={map_icon} alt="logo"/></NavLink>
 
 
       <Nav className="ml-auto" navbar style={{color: "white", fontSize: 20, padding: 4}}>

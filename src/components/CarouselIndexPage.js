@@ -22,19 +22,37 @@ export default class CarouselIndexPage extends React.Component {
 
     if(images.length < 1){
       return (
-      <div>
-        <img width="250px" height="250px" src={Mypic} />
-        {/* <img width="250px" height="250px" src="http://localhost:3001/src/components/gifticon.png" /> */}
+      <div className="text-center default_pic">
+        <img width="100%" height="280px" className="rounded" src={Mypic} />
+      </div>
+      )
+    }
+
+    if(images.length === 1){
+      const url = `url(${DOMAIN}${images[0].photo_url})`
+      return (
+      <div className="text-center default_pic">
+        <div
+          style={{
+            width: "100%",
+            height: "280px",
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+            backgroundImage: url
+          }}
+        />
+
       </div>
       )
     }
 
     return (
-        <Carousel  width="250px" >
+        <Carousel width="100%" >
           {
             images.map(
               image => (
-                  <img key={image.id} width="250px" height="250px" src={`${DOMAIN}${image.photo_url}`} />
+                  <img key={image.id} width= "410px" height="280px" className="rounded"  src={`${DOMAIN}${image.photo_url}`} />
               )
             )
           }

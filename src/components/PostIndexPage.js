@@ -1,11 +1,13 @@
 import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck } from 'reactstrap';
+  CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck, CardFooter } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Field from './Field';
 import { Post } from '../lib/requests';
 import CarouselIndexPage from './CarouselIndexPage';
 import SearchBox from './SearchBox';
+import LocationIcon from './location_icon.png';
+import TimeAgo from 'react-timeago'
 
 
 
@@ -113,8 +115,8 @@ class PostIndexPage extends React.Component {
 
 
     return (
-        <Container fluid>
-          <main>
+          <main className="container">
+
 
             <Button className="ml-5" outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
             <Collapse isOpen={this.state.collapse}>
@@ -127,53 +129,47 @@ class PostIndexPage extends React.Component {
 
 
           {/* <h2>Posts</h2> */}
-          <CardDeck className="indexCard">
-            <Row>
-              <ul>
+          <div className="indexCard d-flex flex-wrap">
                 {
                   posts.map(
                     post => (
-                      <Col key={post.id} lg="3" md="4" sm="6" xs="12">
-                        <p key={post.id}>
-                      <Card className="card">
+                      <div key={post.id} className="card blog">
+                        <div className="card-body">
+
                         <CarouselIndexPage
                         images ={post.albums}
                       />
-                      <CardBody>
-                        <CardTitle>
-                        <Link style={{fontSize: 20}} to={`/posts/${post.id}`}>
+
+                        <Link className="ml-2" style={{fontSize: 20}} to={`/posts/${post.id}`}>
                           {post.title}
                         </Link>
-                        </CardTitle>
+
                         {/* <Field name="Author" value={post.author.full_name} /> */}
-                        <Field name="Location" value={post.address} />
+                        <p className="ml-2"><img width="35px" height="35px" className="rounded" src={LocationIcon} /> {post.address}</p>
+                        <TimeAgo className="ml-2" date={post.created_at} />
                         {/* <p>{post.author.id}</p>
                         <p>{user.id}</p> */}
                         {post.author.id === user.id ?
-                          <div>
-                          <Button color="danger"
-                            data-id={post.id}
-                            onClick={this.deletePost}
-                            >Delete</Button>
-                            <Button
-                              onClick={e => this.handleEdit(post.id)}
-                              className="btn btn-secondary ml-3">
-                              Edit
-                            </Button>
+                          <div className="card-body ">
+                            <CardFooter><button className="btn btn-outline-danger btn-lg"
+                              data-id={post.id}
+                              onClick={this.deletePost}
+                              >Delete</button>
+                              <button
+                                onClick={e => this.handleEdit(post.id)}
+                                className="btn btn-outline-secondary ml-3 btn-lg">
+                                Edit
+                              </button>
+                            </CardFooter>
                           </div>
                           : ''}
-                        </CardBody>
-                      </Card>
-                    </p>
-                    </Col>
+                    </div>
+                  </div>
                     )
                   )
                 }
-              </ul>
-            </Row>
-          </CardDeck>
+          </div>
       </main>
-    </Container>
 
       )
   }

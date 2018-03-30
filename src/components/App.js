@@ -78,7 +78,10 @@ class App extends Component {
             only the first Route that matches will be rendered.
           */}
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route
+              exact path="/"
+              render={props => <SignInPage {...props} onSignIn={this.signIn} />}
+            />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
               user={user}
@@ -118,7 +121,7 @@ class App extends Component {
                   <SignInPage
                     {...props}
                     onSignIn={this.signIn}
-                    />
+                  />
                 )
               }
             />

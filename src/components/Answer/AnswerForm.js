@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, FormGroup, Label, Input} from 'reactstrap';
 
 function AnswerForm(props) {
   // props.onSubmit
@@ -35,7 +35,7 @@ function AnswerForm(props) {
     </FormGroup>
 
     <div>
-      <Button outline="outline" color="primary" style={{
+      <Button outline="outline" color="info" style={{
           fontSize: 15
         }} input="input" type="submit">
         Submit

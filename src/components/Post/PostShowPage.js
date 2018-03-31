@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import {InfoWindow} from 'react-google-maps'
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Jumbotron
 } from 'reactstrap';
 
@@ -20,7 +18,7 @@ import {
 import PostDetails from './PostDetails';
 import AnswerForm from '../Answer/AnswerForm';
 import AnswerList from '../Answer/AnswerList';
-import CarouselIndexPage from './CarouselIndexPage';
+import CarouselShowPage from './CarouselShowPage';
 import {Post, Answer} from '../../lib/requests';
 
 class PostShowPage extends Component {
@@ -91,6 +89,8 @@ class PostShowPage extends Component {
 
   render() {
     const {post, loading} = this.state;
+    const authorId = post.author ? post.author.id : -1;
+    const { user } = this.props;
 
     if (loading) {
       return (<main className="PostShowPage d-flex align-items-center justify-content-center" style={{
@@ -119,28 +119,48 @@ class PostShowPage extends Component {
         marginTop: "15px"
       }}>
       <br/>
-      <CarouselIndexPage images={post.albums}/>
+      <CarouselShowPage images={post.albums}/>
 
-      <Jumbotron>
-        <PostDetails {...post}/>
+      <Jumbotron id="jumbotron">
 
-        <Button outline="outline" color="primary" style={{
-            fontSize: 15
-          }} onClick={this.toggle}>{this.props.buttonLabel}Contact Donator</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
-          <ModalBody>
-            <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
+        {authorId === user.id ?
 
-          </ModalBody>
-        </Modal>
+              <div>
+                <Button color="info" style={{
+                  fontSize: 15
+                }} onClick={this.toggle}>{this.props.buttonLabel}Reply List</Button>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                  <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
+                  <ModalBody>
+                    <AnswerList
+                      answers={post.answers}
+                      onAnswerDeleteClick={this.deleteAnswer}
+                    />
+                  </ModalBody>
+                </Modal>
+              </div>
+
+          :
+              <div>
+                <Button  color="info" style={{
+                  fontSize: 15
+                }} onClick={this.toggle}>{this.props.buttonLabel}Contact Donator</Button>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                  <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
+                  <ModalBody>
+                    <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
+                  </ModalBody>
+                </Modal>
+              </div>
+
+          }
+
+          <PostDetails {...post}/>
 
       </Jumbotron>
 
-      <AnswerList
-        answers={post.answers}
-        onAnswerDeleteClick={this.deleteAnswer}
-      />
 
     </main>)
   }

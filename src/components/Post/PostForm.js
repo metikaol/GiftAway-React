@@ -90,7 +90,7 @@ class PostForm extends Component {
           {this.renderSelectedPostCoverFiles()}
         </div>
         {this.renderUploadFormProgress()}
-        <button disabled={this.state.isSubmittingForm} onClick={e => this.handleFormSubmit()} className="btn btn-outline-primary btn-lg ">
+        <button disabled={this.state.isSubmittingForm} onClick={e => this.handleFormSubmit()} className="btn btn-outline-info btn-lg ">
           {
             this.state.isSubmittingForm
               ? 'Saving...'
@@ -117,7 +117,7 @@ class PostForm extends Component {
           position: 'absolute',
           zIndex: -1
         }} id="post_covers" onChange={e => this.handlePostCoversChange(e)} className="form-control"/>
-      <label disabled={this.state.isSubmittingForm} className="btn btn-primary" htmlFor="post_covers">
+      <label disabled={this.state.isSubmittingForm} className="btn btn-info" htmlFor="post_covers">
         <span className="glyphicon glyphicon-cloud-upload"/>
         &nbsp; &nbsp; {
           numberOfSelectedCovers === 0

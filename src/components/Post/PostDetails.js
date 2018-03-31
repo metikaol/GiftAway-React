@@ -1,5 +1,4 @@
 import React from 'react';
-import Field from '../Field';
 import TimeAgo from 'react-timeago'
 
 

@@ -1,8 +1,7 @@
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Collapse, Button, Container, Row, Col, CardDeck, CardFooter } from 'reactstrap';
+import { Card, CardBody,
+    Collapse, Button, CardFooter } from 'reactstrap';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Field from '../Field';
 import { Post } from '../../lib/requests';
 import CarouselIndexPage from './CarouselIndexPage';
 import SearchBox from '../Search/SearchBox';
@@ -118,7 +117,7 @@ class PostIndexPage extends React.Component {
           <main className="container mt-3">
 
 
-            <Button className="ml-3" outline color="primary" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
+            <Button className="ml-3" outline color="info" onClick={this.toggle} style={{ marginBottom: '1rem', fontSize: 15 }}>Search</Button>
             <Collapse isOpen={this.state.collapse}>
               <Card>
                 <CardBody>

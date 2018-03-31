@@ -124,7 +124,7 @@ class Map extends Component {
       }}>
 
       <div>
-        <Button outline="outline" color="primary" onClick={this.toggle} style={{
+        <Button outline="outline" color="info" onClick={this.toggle} style={{
             marginBottom: '1rem',
             fontSize: 15
           }}>Search</Button>

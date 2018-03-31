@@ -1,13 +1,4 @@
 import React from 'react';
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button
-} from 'reactstrap';
 import Carousel from 'nuka-carousel';
 import Mypic from '../../images/gifticon.png';
 const DOMAIN = 'http://localhost:3000';

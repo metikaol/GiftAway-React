@@ -83,7 +83,7 @@ class SignUpPage extends Component {
             />
             <FormErrors forField="password_confirmaiton" errors={errors} />
           </div>
-          <input className="btn btn-outline-primary mt-5" style={{ fontSize: 20}} type="submit" value="submit" />
+          <input className="btn btn-outline-info mt-5" style={{ fontSize: 20}} type="submit" value="submit" />
         </form>
       </div>
     );

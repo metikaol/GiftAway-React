@@ -56,9 +56,9 @@ class SearchForm extends Component {
           }} name="search1" id="search1" placeholder="  Item"/>
       </FormGroup>
 
-      <Button type="submit" outline="outline" style={{
+      <Button type="submit" outline style={{
           fontSize: 15
-        }} value="Submit" color="primary">Submit</Button>
+        }} value="Submit" color="info">Submit</Button>
     </Form>)
   }
 }

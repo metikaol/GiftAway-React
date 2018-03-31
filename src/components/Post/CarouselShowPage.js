@@ -3,7 +3,7 @@ import Carousel from 'nuka-carousel';
 import Mypic from '../../images/gifticon.png';
 const DOMAIN = 'http://localhost:3000';
 
-export default class CarouselIndexPage extends React.Component {
+export default class CarouselShowPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ export default class CarouselIndexPage extends React.Component {
 
     if (images.length < 1) {
       return (<div className="text-center default_pic">
-        <img width="100%" height="280px" className="rounded" src={Mypic}/>
+        <img width="100%" height="400px" className="rounded" src={Mypic}/>
       </div>)
     }
 
@@ -36,13 +36,13 @@ export default class CarouselIndexPage extends React.Component {
             backgroundImage: url
           }}/> */}
 
-          <img width="100%" height="280px" className="rounded" src={`${DOMAIN}${images[0].photo_url}`}/>
+          <img width="100%" height="400px" className="rounded" src={`${DOMAIN}${images[0].photo_url}`}/>
 
       </div>)
     }
 
     return (<Carousel width="100%">
-      {images.map(image => (<img key={image.id} width="410px" height="280px" className="rounded" src={`${DOMAIN}${image.photo_url}`}/>))}
+      {images.map(image => (<img key={image.id} width="400px" height="400px" className="rounded" src={`${DOMAIN}${image.photo_url}`}/>))}
     </Carousel>);
 
   }

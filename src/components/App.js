@@ -106,6 +106,7 @@ class App extends Component {
             />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
+              user={user}
               path="/posts/:id"
               component={PostShowPage}
             />

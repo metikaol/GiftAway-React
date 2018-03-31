@@ -24,7 +24,7 @@ function NavBar (props) {
 
       <Navbar className="navbar navbar-light bg-info sticky-top mb-0" expand>
 
-      <NavLink style={{color: "white", fontSize: 20}} exact to="/posts" >GiftAway</NavLink>
+      <NavLink id="GiftAway" exact to="/posts" >GiftAway</NavLink>
 
       <NavLink exact to="/map"><img className="navbar-brand" src={map_icon} alt="logo"/></NavLink>
 

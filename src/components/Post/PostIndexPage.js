@@ -150,7 +150,7 @@ class PostIndexPage extends React.Component {
                         <p>{user.id}</p> */}
                         {post.author.id === user.id ?
                           <div className="card-body ">
-                            <CardFooter><button className="btn btn-outline-danger btn-lg"
+                            <button className="btn btn-outline-danger btn-lg ml-2"
                               data-id={post.id}
                               onClick={this.deletePost}
                               >Delete</button>
@@ -159,7 +159,6 @@ class PostIndexPage extends React.Component {
                                 className="btn btn-outline-secondary ml-3 btn-lg">
                                 Edit
                               </button>
-                            </CardFooter>
                           </div>
                           : ''}
                     </div>

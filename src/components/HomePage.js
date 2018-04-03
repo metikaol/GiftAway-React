@@ -59,11 +59,10 @@ class HomePage extends Component {
               </em>
             </h1>
             <h1 className="display-1" style={{ fontSize: 80 }}>
-
-                <strong>
+              <strong>
                 Space for giving !!
               </strong>
-              
+
             </h1>
 
             <div className="row mt-4">

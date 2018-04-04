@@ -112,7 +112,6 @@ class PostIndexPage extends React.Component {
       )
     }
 
-
     return (
           <main className="container mt-3">
 

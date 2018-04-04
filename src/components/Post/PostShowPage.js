@@ -128,7 +128,7 @@ class PostShowPage extends Component {
               <div>
                 <Button color="info" style={{
                   fontSize: 15
-                }} onClick={this.toggle}>{this.props.buttonLabel}Reply List</Button>
+                }} onClick={this.toggle}>{this.props.buttonLabel}View Replies</Button>
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                   <ModalHeader toggle={this.toggle}>Reply</ModalHeader>

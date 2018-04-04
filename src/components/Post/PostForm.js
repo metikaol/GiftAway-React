@@ -76,7 +76,7 @@ class PostForm extends Component {
         </div>
 
         <div className="form-group">
-          <label>Location for picking up</label>
+          <label>Pickup Location</label>
           <PlacesAutocomplete inputProps={{
               value: this.state.post.address,
               onChange: this.onChangeAddress

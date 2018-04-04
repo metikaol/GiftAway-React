@@ -8,11 +8,11 @@ class SearchForm extends Component {
     super(props);
     this.onSubmit = props.onSubmit;
     this.state = {
-      search2: ''
+      search_location: ''
     }
     this.onChangeAddress = (address) => {
-      this.setState({search2: address});
-      geocodeByAddress(this.state.search2).then(results => getLatLng(results[0])).then((latLng) => {
+      this.setState({search_location: address});
+      geocodeByAddress(this.state.search_location).then(results => getLatLng(results[0])).then((latLng) => {
         console.log('Success', latLng);
         this.setState({latLng: latLng});
       }).catch(error => console.error('Error', error))
@@ -29,7 +29,7 @@ class SearchForm extends Component {
     // console.log(
     //   Array.from(formData.entries())
     // )
-    this.onSubmit({search1: formData.get('search1'), search2: formData.get('search2'), latLng: this.state.latLng});
+    this.onSubmit({search_item: formData.get('search_item'), search_location: formData.get('search_location'), latLng: this.state.latLng});
   }
 
   render() {
@@ -39,11 +39,11 @@ class SearchForm extends Component {
     // }
     return (<Form className="SearchForm" onSubmit={this.handleSubmit}>
       <div className="form-group">
-        {/* <label htmlFor="search2">Search by location</label> <br /> */}
+        {/* <label htmlFor="search_location">Search by location</label> <br /> */}
         <PlacesAutocomplete inputProps={{
-            value: this.state.search2,
+            value: this.state.search_location,
             onChange: this.onChangeAddress,
-            name: "search2",
+            name: "search_location",
             placeholder: "Location"
           }}
           // classNames={cssClasses}
@@ -53,7 +53,7 @@ class SearchForm extends Component {
       <FormGroup>
         <input className="form-control" style={{
             fontSize: 15
-          }} name="search1" id="search1" placeholder="  Item"/>
+          }} name="search_item" id="search_item" placeholder="  Item"/>
       </FormGroup>
 
       <Button type="submit" outline style={{

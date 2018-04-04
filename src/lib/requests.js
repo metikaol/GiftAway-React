@@ -54,6 +54,17 @@ const Answer = {
       }
     )
       .then(res => res.json())
+  },
+  delete (id) {
+    return fetch(
+      `${BASE_URL}/answers/${id}`,
+      {
+        headers: {
+          'Authorization': getJWT(),
+        },
+        method: 'DELETE'
+      }
+    )
   }
 }
 
@@ -61,7 +72,7 @@ const Post = {
 
   search (param1,param2) {
     return fetch(
-      `${BASE_URL}/posts?utf8=✓&search1=${param1}&search2=${param2}`,
+      `${BASE_URL}/posts?utf8=✓&search_item=${param1}&search_location=${param2}`,
       {
         headers: {
           'Authorization': getJWT(),

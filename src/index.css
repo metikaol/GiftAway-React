@@ -1,3 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Playball');
+
+#GiftAway {
+font-family: 'Playball';
+font-size: 30px;
+color: white;
+margin-left: 20px;
+margin-right: 10px;
+}
+
+#jumbotron{
+  padding: 20px;
+  /* padding-right: 20px; */
+}
+
+.card.blog{
+  width:100%;
+  margin: 1rem;
+  border-radius: 10px;
+  /* border: mediumturquoise solid; */
+}
+
+.card-body{
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+ .card.blog {
+   width: calc((100% - 4 * 1rem) / 2);
+ }
+}
+
+@media screen and (min-width:900px){
+  .card.blog{
+    width:calc((100% - 6 * 1rem) / 3);
+  }
+}
+
+
+@media (min-width: 576px) {
+
+	.gallery-block .transform-on-hover:hover {
+	    transform: translateY(-10px) scale(1.02);
+	}
+}
+
+.card.blog:hover{
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 10px 10px 5px grey;
+}
+
+
+/*
 .indexCard .card {
   width: 253px;
   max-height: 400px;
@@ -7,11 +60,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  /* overflow: scroll; */
-}
+  /* overflow: scroll;
+} */
 
-.SignInPage > *{
-  text-align: center;
+.SignUp input{
+  font-size: 17px;
 }
 
 .FormErrors {
@@ -23,105 +76,26 @@ body {
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 15px;
+  height: 100%;
+  /* background-color: #825201; */
 }
 
-/* .Field {
-  font-size: 0.6em;
-  margin: 0.2em 0;
-}
 
-.NavBar {
-  display: flex;
-  background-color: deepskyblue;
+#cover {
+  background-image: url('./images/bg.jpg');
+
+  height: 100vh;
+
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
   color: white;
-}
-
-.NavBar * {
-  color: inherit;
-}
-
-.NavBar > * {
-  padding: 0.75em 0.5em;
-  text-decoration: none;
-  border-bottom: 5px solid deepskyblue;
-}
-
-.NavBar > .active {
-  border-bottom: 5px solid white;
-}
-
-.NavBar > *:first-child {
-  margin-left: auto;
-}
-
-.map-price-container {
-  overflow: visible !important;
-} */
-
-.map-price-marker {
-  position: absolute;
-  font-family: 'Helvetica';
-  left: -37px;
-  top: -25px;
-  width: 70px;
-  height: 20px;
-  border-radius: 3px;
-  line-height: 22px;
-  background-color: white;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
   text-align: center;
-  color: black;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1px solid gray;
-  z-index: 1;
-}
-.map-price-marker:before,
-.map-price-marker:after {
-  position: absolute;
-  content: "";
-  border-style: solid;
+  display: flex;
+  align-items: center;
 }
 
-.map-price-marker:after {
-  left: 31px;
-  top: 19px;
-  border-width: 5px;
-  border-color: white transparent transparent;
-}
-
-.map-price-marker:before {
-  left: 30px;
-  top: 20px;
-  border-width: 6px;
-  border-color: gray transparent transparent;
-}
-
-.map-price-marker.visited:hover {
-  background-color: #7b8d93;
-  color: #fff;
-  border-color: #5b6a6f;
-}
-
-.map-price-marker.visited:hover:after {
-  border-color: #7b8d93 transparent transparent;
-}
-
-.map-price-marker.visited:hover:before {
-  border-color: #5b6a6f transparent transparent;
-}
-
-.map-price-marker:hover {
-  background-color: #f2f2f2;
-  color: black;
-  border-color: gray;
-  z-index: 3;
-}
-
-.map-price-marker:hover:after {
-  border-color: #f2f2f2 transparent transparent;
-}
-
-.map-price-marker:hover:before {
-  border-color: gray transparent transparent;
+#cover-caption{
+  width: 100%
 }

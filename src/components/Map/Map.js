@@ -1,9 +1,9 @@
-import {Collapse, Button, CardBody, Card} from 'reactstrap';
+import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import SearchBox from '../Search/SearchBox';
-import React, {Component} from 'react'
-import {withGoogleMap, GoogleMap} from 'react-google-maps'
+import React, { Component } from 'react'
+import { withGoogleMap, GoogleMap } from 'react-google-maps'
 import PlaceMarker from './PlaceMarker';
-import {Maps} from '../../lib/requests';
+import { Maps } from '../../lib/requests';
 const DOMAIN = 'http://localhost:3000';
 
 const GiftAwayMap = withGoogleMap(props => {

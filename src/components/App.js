@@ -8,13 +8,17 @@ import {
   Switch
 } from "react-router-dom";
 
-import Map from './Map';
-import PostShowPage from './PostShowPage';
-import PostIndexPage from './PostIndexPage';
-import PostNewPage from './PostNewPage';
-import SignInPage from './SignInPage';
+import Map from './Map/Map';
+import PostShowPage from './Post/PostShowPage';
+import PostIndexPage from './Post/PostIndexPage';
+import PostNewPage from './Post/PostNewPage';
+import PostEditPage from './Post/PostEditPage';
+import SignUpPage from './SignUpPage';
+import NotFoundPage from './NotFoundPage';
+import HomePage from './HomePage';
 import NavBar from './NavBar';
 import AuthRoute from './AuthRoute';
+
 
 // When building React applications, we create
 // a root component that is the ancestor to all the
@@ -64,17 +68,29 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+
+          {
+          this.isSignedIn() ?
           <NavBar
             user={user}
             onSignOut={this.signOut}
-          />
+          /> : null
+          }
+
           {/*
             When wrapping routes inside of a Switch component,
             only the first Route that matches will be rendered.
           */}
           <Switch>
+
+            <Route
+              exact path="/"
+              render={props => <HomePage {...props} onSignIn={this.signIn} />}
+            />
+
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
+              user={user}
               exact
               path="/posts" component={PostIndexPage}
             />
@@ -85,6 +101,12 @@ class App extends Component {
             />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
+              path="/posts/:id/edit"
+              component={PostEditPage}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              user={user}
               path="/posts/:id"
               component={PostShowPage}
             />
@@ -93,18 +115,23 @@ class App extends Component {
               path="/map"
               component={Map}
             />
-            {/* <Route path="/sign_in" component={SignInPage} /> */}
+            {/* <Route path="/sign_in" component={HomePage} /> */}
             <Route
               path="/sign_in"
               render={
                 props => (
-                  <SignInPage
+                  <HomePage
                     {...props}
                     onSignIn={this.signIn}
                   />
                 )
               }
             />
+            <Route
+              path="/sign_up"
+              render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
+            />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </Router>

@@ -38,7 +38,8 @@ class SearchForm extends Component {
     //   input: 'form-control',
     // }
     return (<Form className="SearchForm" onSubmit={this.handleSubmit}>
-      <div className="form-group">
+
+      <div className="form-group mt-3">
         {/* <label htmlFor="search_location">Search by location</label> <br /> */}
         <PlacesAutocomplete inputProps={{
             value: this.state.search_location,
@@ -56,7 +57,7 @@ class SearchForm extends Component {
           }} name="search_item" id="search_item" placeholder="  Item"/>
       </FormGroup>
 
-      <Button type="submit" outline style={{
+      <Button className="mb-3" type="submit" outline style={{
           fontSize: 15
         }} value="Submit" color="info">Submit</Button>
     </Form>)

@@ -38,6 +38,7 @@ class SearchForm extends Component {
     //   input: 'form-control',
     // }
     return (<Form className="SearchForm" onSubmit={this.handleSubmit}>
+
       <div className="form-group mt-3">
         {/* <label htmlFor="search_location">Search by location</label> <br /> */}
         <PlacesAutocomplete inputProps={{

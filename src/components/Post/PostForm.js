@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import axiosClient from '../../lib/axiosClient';
 import './Index.css';
-import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+import PlacesAutocomplete,
+      {geocodeByAddress, getLatLng}
+from 'react-places-autocomplete';
 import FormErrors from '../FormErrors';
 
 class PostForm extends Component {
@@ -11,7 +13,6 @@ class PostForm extends Component {
       this.setState({
         post: Object.assign(this.state.post, {address: address})
       });
-
     }
 
     this.state = {
@@ -57,77 +58,81 @@ class PostForm extends Component {
       errors = []
     } = this.state.post.errors
 
-    return (<div className="PostForm">
-      <form>
-        <div className="form-group">
-          <label>Title</label>
-          <input style={{
-              fontSize: 15
-            }} type="text" onChange={e => this.handlePostTitleChange(e)} value={this.state.post.title} className="form-control"/>
-          <FormErrors forField="title" errors={errors}/>
-        </div>
+    return (
+      <div className="PostForm">
+        <form>
+          <div className="form-group">
+            <label>Title</label>
+            <input style={{ fontSize: 15}}
+              type="text" onChange={e => this.handlePostTitleChange(e)} value={this.state.post.title} className="form-control"/>
+            <FormErrors forField="title" errors={errors}/>
+          </div>
 
-        <div className="form-group">
-          <label>Description</label>
-          <textarea style={{
-              fontSize: 15
-            }} type="text" onChange={e => this.handlePostDescriptionChange(e)} value={this.state.post.body} className="form-control"/>
-          <FormErrors forField="body" errors={errors}/>
-        </div>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea style={{ fontSize: 15 }}
+              type="text" onChange={e => this.handlePostDescriptionChange(e)} value={this.state.post.body} className="form-control"/>
+            <FormErrors forField="body" errors={errors}/>
+          </div>
 
-        <div className="form-group">
-          <label>Pickup Location</label>
-          <PlacesAutocomplete inputProps={{
-              value: this.state.post.address,
-              onChange: this.onChangeAddress
-            }}/>
-          <FormErrors forField="address" errors={errors}/>
-        </div>
+          <div className="form-group">
+            <label>Pickup Location</label>
+            <PlacesAutocomplete inputProps={{
+                value: this.state.post.address,
+                onChange: this.onChangeAddress
+              }}/>
+            <FormErrors forField="address" errors={errors}/>
+          </div>
 
-        <div className="form-group">
-          <label>Pictures</label>
-          {this.renderUploadCoversButton()}
-          {this.renderSelectedPostCoverFiles()}
-        </div>
-        {this.renderUploadFormProgress()}
-        <button disabled={this.state.isSubmittingForm} onClick={e => this.handleFormSubmit()} className="btn btn-outline-info btn-lg ">
-          {
-            this.state.isSubmittingForm
-              ? 'Saving...'
-              : 'Save'
-          }
-        </button>
-        &nbsp;
-        <button disabled={this.state.isSubmittingForm} onClick={e => this.handleCancel()} className="btn btn-outline-secondary btn-lg">
-          Cancel
-        </button>
-      </form>
+          <div className="form-group">
+            <label>Pictures</label>
+            {this.renderUploadCoversButton()}
+            {this.renderSelectedPostCoverFiles()}
+          </div>
+
+          {this.renderUploadFormProgress()}
+          <button disabled={this.state.isSubmittingForm}
+            onClick={e => this.handleFormSubmit()} className="btn btn-outline-info btn-lg "
+          >
+            {
+              this.state.isSubmittingForm
+                ? 'Saving...'
+                : 'Save'
+            }
+          </button>
+          {/* &nbsp : create a space in a line that cannot be broken by word wrap */}
+          &nbsp;
+          <button disabled={this.state.isSubmittingForm} onClick={e => this.handleCancel()} className="btn btn-outline-secondary btn-lg">
+            Cancel
+          </button>
+        </form>
       <br/>
     </div>);
   }
 
   renderUploadCoversButton() {
     let numberOfSelectedCovers = this.getNumberOfSelectedFiles();
-    return (<div>
-      <input name="covers[]" ref={field => (this.postCoversField = field)} type="file" disabled={this.state.isSubmittingForm} multiple={true} accept="image/*" style={{
-          width: 0.1,
-          height: 0.1,
-          opacity: 0,
-          overflow: 'hidden',
-          position: 'absolute',
-          zIndex: -1
-        }} id="post_covers" onChange={e => this.handlePostCoversChange(e)} className="form-control"/>
-      <label disabled={this.state.isSubmittingForm} className="btn btn-info" htmlFor="post_covers">
-        <span className="glyphicon glyphicon-cloud-upload"/>
-        &nbsp; &nbsp; {
-          numberOfSelectedCovers === 0
-            ? 'Upload Files'
-            : `${numberOfSelectedCovers} file${numberOfSelectedCovers !== 1
-              ? 's'
-              : ''} selected`
-        }
-      </label>
-    </div>);
+    return (
+      <div>
+        <input name="covers[]" ref={field => (this.postCoversField = field)} type="file" disabled={this.state.isSubmittingForm} multiple={true} accept="image/*" style={{
+            width: 0.1,
+            height: 0.1,
+            opacity: 0,
+            overflow: 'hidden',
+            position: 'absolute',
+            zIndex: -1
+          }} id="post_covers" onChange={e => this.handlePostCoversChange(e)} className="form-control"/>
+        <label disabled={this.state.isSubmittingForm} className="btn btn-info" htmlFor="post_covers">
+          <span className="glyphicon glyphicon-cloud-upload"/>
+          &nbsp; &nbsp; {
+            numberOfSelectedCovers === 0
+              ? 'Upload Files'
+              : `${numberOfSelectedCovers} file${numberOfSelectedCovers !== 1
+                ? 's'
+                : ''} selected`
+          }
+        </label>
+      </div>);
   }
 
   renderSelectedPostCoverFiles() {

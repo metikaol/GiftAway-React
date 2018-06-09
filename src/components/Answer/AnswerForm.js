@@ -2,7 +2,6 @@ import React from 'react'
 import {Button, FormGroup, Label, Input} from 'reactstrap';
 
 function AnswerForm(props) {
-  // props.onSubmit
   const {
     onSubmit = () => {}
   } = props
@@ -22,22 +21,19 @@ function AnswerForm(props) {
 
     <FormGroup>
       <Label htmlFor="body">Message</Label>
-      <Input style={{
-          fontSize: 15
-        }} type="textarea" name="body" id="body" placeholder="Type message here"/>
+      <Input style={{ fontSize: 15 }} type="textarea" name="body" id="body"
+        placeholder="Type message here"/>
     </FormGroup>
 
     <FormGroup>
       <Label htmlFor="contact">Contact Info</Label>
-      <Input style={{
-          fontSize: 15
-        }} type="contact" name="contact" id="contact" placeholder="Phone Number or Email Address"/>
+      <Input style={{ fontSize: 15}} type="contact" name="contact"
+        id="contact" placeholder="Phone Number or Email Address"/>
     </FormGroup>
 
     <div>
-      <Button outline="outline" color="info" style={{
-          fontSize: 15
-        }} input="input" type="submit">
+      <Button outline="outline" color="info" style={{fontSize: 15}}
+        input="input" type="submit">
         Submit
       </Button>
     </div>

@@ -22,17 +22,17 @@ function NavBar (props) {
 
   return (
 
-      <Navbar className="navbar navbar-light bg-info sticky-top mb-0" expand>
+    <Navbar className="navbar navbar-light bg-info sticky-top mb-0" expand>
 
       <NavLink id="GiftAway" exact to="/posts" >GiftAway</NavLink>
 
-      <NavLink exact to="/map"><img className="navbar-brand" src={map_icon} alt="logo"/></NavLink>
-
-
-      <Nav className="ml-auto" navbar style={{color: "white", fontSize: 20, padding: 4}}>
+      <NavLink exact to="/map">
+        <img className="navbar-brand" src={map_icon} alt="logo"/>
+      </NavLink>
 
       <NavLink className="mr-4" style={{color: "white", fontSize: 20}} exact to="/posts/new">New Item</NavLink>
-      {user
+      {
+        user
         ? [
             <span key="1">Hello, {user.first_name}</span>,
             <a key="2" href="/sign_out" onClick={handleSignOut} className="mr-4 ml-4" style={{color: "white", fontSize: 20}}>
@@ -46,8 +46,8 @@ function NavBar (props) {
             <NavLink className="mr-4" style={{color: "white", fontSize: 20}} key="2" exact to="/sign_up">
               Sign Up
             </NavLink>
-          ]}
-       </Nav>
+          ]
+      }
     </Navbar>
   )
 }

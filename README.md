@@ -1,14 +1,13 @@
+# GiftAway-React-Client
 
-GiftAway-React-Client
-Made to be a space for giving! People give away
-their unneeded items to other people that need
-them.
-Check it out on Heroku: gift-away.herokuapp.com/.
+GiftAway application is made to be a space for giving! People give away
+their unneeded items to other people that need them.
+Check it out on Heroku: https://gift-away.herokuapp.com/.
 
-Technologies Used
+## Technologies Used
 
-React
-Google Maps API
-Bootstrap
-HTML
-CSS
+* React
+* Google Maps API
+* Bootstrap
+* HTML
+* CSS

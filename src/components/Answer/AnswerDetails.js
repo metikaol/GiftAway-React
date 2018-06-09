@@ -21,7 +21,9 @@ function AnswerDetails (props) {
       <br/>
       <button className="btn btn-outline-danger"
         onClick={() => onDeleteClick(props.id)}
-      >Delete</button>
+      >
+        Delete
+      </button>
       <hr/>
     </div>
   )

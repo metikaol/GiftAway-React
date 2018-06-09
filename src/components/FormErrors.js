@@ -5,27 +5,27 @@ import React from 'react';
 */
 
 function FormErrors(props) {
-  const {
-    forField,
-    errors = []
-  } = props;
+  const { forField, errors = [] } = props;
 
   let filteredErrors;
   if (forField) {
-    filteredErrors = errors.filter(e => {
-      if (e.field) {
-        return e.field.toLowerCase() === forField.toLowerCase()
-      }
-      return;
-    })
+    filteredErrors = errors.filter(
+      e => {
+        if (e.field) {
+          return e.field.toLowerCase() === forField.toLowerCase()
+        }
+        return;
+      })
   } else {
     filteredErrors = errors;
   }
 
   if (filteredErrors.length > 0) {
-    return (<ul className="FormErrors">
+    return (
+      <ul className="FormErrors">
       {filteredErrors.map((e, i) => <li key={i}>{e.message}</li>)}
-    </ul>)
+      </ul>
+    );
   } else {
     return null;
   }

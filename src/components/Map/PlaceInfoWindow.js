@@ -8,17 +8,16 @@ export class PlaceInfoWindow extends Component {
   render() {
     const {title, albums, id, created_at} = this.props
 
-    return (<InfoWindow onCloseClick={this.props.closeWindow}>
-      <div>
-        <CarouselMapPage images={albums}/>
-        <Link style={{
-            fontSize: `25px`
-          }} to={`/posts/${id}`}>
-          {title}
-        </Link><br/>
-        <TimeAgo date={created_at}/>
-
-      </div>
+    return (
+      <InfoWindow onCloseClick={this.props.closeWindow}>
+        <div>
+          <CarouselMapPage images={albums}/>
+          <Link style={{ fontSize: `25px` }} to={`/posts/${id}`}>
+            {title}
+          </Link>
+          <br/>
+          <TimeAgo date={created_at}/>
+        </div>
     </InfoWindow>);
   }
 }

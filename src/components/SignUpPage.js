@@ -8,9 +8,7 @@ class SignUpPage extends Component {
   constructor (props) {
     super(props);
 
-      this.state = {
-        errors: []
-      }
+      this.state = { errors: [] }
       this.handleSubmit = this.handleSubmit.bind(this)
     }
 

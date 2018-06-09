@@ -29,9 +29,7 @@ class App extends Component {
   constructor (props) {
     super(props);
 
-    this.state = {
-      user: null
-    };
+    this.state = { user: null };
 
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
@@ -42,7 +40,7 @@ class App extends Component {
   }
 
   signIn () {
-    const jwt =  localStorage.getItem('jwt');
+    const jwt = localStorage.getItem('jwt');
 
     if (jwt) {
       const payload = jwtDecode(jwt);
@@ -82,17 +80,14 @@ class App extends Component {
             only the first Route that matches will be rendered.
           */}
           <Switch>
-
             <Route
               exact path="/"
               render={props => <HomePage {...props} onSignIn={this.signIn} />}
             />
-
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
               user={user}
-              exact
-              path="/posts" component={PostIndexPage}
+              exact path="/posts" component={PostIndexPage}
             />
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
@@ -115,7 +110,6 @@ class App extends Component {
               path="/map"
               component={Map}
             />
-            {/* <Route path="/sign_in" component={HomePage} /> */}
             <Route
               path="/sign_in"
               render={

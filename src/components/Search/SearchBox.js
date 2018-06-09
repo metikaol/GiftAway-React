@@ -14,9 +14,6 @@ class SearchBox extends Component {
     const latLng = params.latLng
     Post.search(param1, param2).then(posts => {
       this.props.updatePosts(posts, latLng);
-
-      // this.props.history.push(`/posts`);
-      // window.location.reload()
     })
   }
 

@@ -57,8 +57,7 @@ class PostShowPage extends Component {
       }
     })
 
-    Answer
-    .delete(answerId)
+    Answer.delete(answerId)
   }
 
   createAnswer(params, id) {
@@ -67,18 +66,14 @@ class PostShowPage extends Component {
       answer: params
     }
 
-    Answer.create(answerParams).then(data => {
-      // const id = data.id
-      // const { id } = data;
-
-      // Components rendered by the <Route /> component
-      // gain access to a .history than can be used to manipulate
-      // history. Using allows to redirect a user to
-      // a different rendering whichever component is there.
-      // this.props.history.push(`/posts/${id}`);
-      // reload the current page with updated data
-      window.location.reload()
-    })
+    Answer
+      .create(answerParams)
+      .then(
+        data => {
+        // reload the current page with updated data
+        window.location.reload()
+        }
+      )
   }
 
   toggle() {
@@ -93,75 +88,78 @@ class PostShowPage extends Component {
     const { user } = this.props;
 
     if (loading) {
-      return (<main className="PostShowPage d-flex align-items-center justify-content-center" style={{
-          margin: '0 1rem'
-        }}>
-        <h4>Loading...</h4>
-      </main>);
+      return (
+        <main className="PostShowPage d-flex align-items-center
+          justify-content-center" style={{ margin: '0 1rem' }}>
+          <h4>Loading...</h4>
+        </main>);
     }
 
     if (!post.id) {
-      return (<main className="PostShowPage d-flex align-items-center justify-content-center" style={{
-          margin: '0 1rem'
-        }}>
-        <h2>Post doesn't exist!</h2>
-      </main>)
+      return (
+        <main className="PostShowPage d-flex align-items-center
+          justify-content-center" style={{ margin: '0 1rem' }}>
+          <h2>Post doesn't exist!</h2>
+        </main>)
     }
+
     // To pass props to React elements, set them with
     // "HTML attrbutes" inside JSX. Each attribute will
     // act as a property of the component's `props` object.
 
     // 1rem is == to the font-size of the root tag (<html> ...).
-    return (<main className="PostShowPage container mx-auto" style={{
+    return (
+      <main className="PostShowPage container mx-auto"
+        style={{
         margin: '0 1rem',
         width: "600px",
         height: 'auto',
         marginTop: "15px"
-      }}>
+        }}
+      >
       <br/>
       <CarouselShowPage images={post.albums}/>
 
       <Jumbotron id="jumbotron">
+        {authorId === user.id
+          ?
+            <div>
+              <Button color="info" style={{ fontSize: 15}}
+                onClick={this.toggle}>
+                {this.props.buttonLabel}View Replies
+              </Button>
 
-        {authorId === user.id ?
-
-              <div>
-                <Button color="info" style={{
-                  fontSize: 15
-                }} onClick={this.toggle}>{this.props.buttonLabel}View Replies</Button>
-
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                  <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
-                  <ModalBody>
-                    <AnswerList
-                      answers={post.answers}
-                      onAnswerDeleteClick={this.deleteAnswer}
-                    />
-                  </ModalBody>
-                </Modal>
-              </div>
-
+              <Modal isOpen={this.state.modal} toggle={this.toggle}
+                className={this.props.className}>
+                <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
+                <ModalBody>
+                  <AnswerList
+                    answers={post.answers}
+                    onAnswerDeleteClick={this.deleteAnswer}
+                  />
+                </ModalBody>
+              </Modal>
+            </div>
           :
-              <div>
-                <Button  color="info" style={{
-                  fontSize: 15
-                }} onClick={this.toggle}>{this.props.buttonLabel}Contact Donator</Button>
+            <div>
+              <Button  color="info" style={{ fontSize: 15}}
+                onClick={this.toggle}>
+                {this.props.buttonLabel}Contact Donator
+              </Button>
 
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                  <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
-                  <ModalBody>
-                    <AnswerForm onSubmit={values => this.createAnswer(values, post.id)}/>
-                  </ModalBody>
-                </Modal>
-              </div>
-
+              <Modal isOpen={this.state.modal} toggle={this.toggle}
+                className={this.props.className}>
+                <ModalHeader toggle={this.toggle}>Reply</ModalHeader>
+                <ModalBody>
+                  <AnswerForm
+                    onSubmit={values => this.createAnswer(values, post.id)}
+                  />
+                </ModalBody>
+              </Modal>
+            </div>
           }
-
-          <PostDetails {...post}/>
-
+        <PostDetails {...post}/>
       </Jumbotron>
-
-
     </main>)
   }
 }

@@ -14,27 +14,28 @@ export default class CarouselMapPage extends React.Component {
   }
 
   render() {
-    // console.log(this.props.images)
     const {images} = this.props
-    // console.log('image',images)
 
+    // Show default image if no images from user
     if (images.length < 1) {
-      return (<div className="text-center default_pic">
-        <img width="300px" height="300px" className="rounded" src={Mypic}/>
-      </div>)
+      return (
+        <div className="text-center default_pic">
+          <img width="300px" height="300px" className="rounded" src={Mypic}/>
+        </div>
+      )
     }
-    //
-    // if(images.length === 1){
-    //   return (
-    //   <div className="text-center default_pic">
-    //     <img width="100%" height="100%" className="rounded" src={`${DOMAIN}${images[0].photo_url}`} />
-    //   </div>
-    //   )
-    // }
 
-    return (<Carousel width="300px">
-      {images.map(image => (<img key={image.id} width="300px" height="300px" className="rounded" src={`${DOMAIN}${image.photo_url}`}/>))}
-    </Carousel>);
+    return (
+      <Carousel width="300px">
+        {
+          images.map(
+            image => (
+              <img key={image.id} width="300px" height="300px"
+                className="rounded" src={`${DOMAIN}${image.photo_url}`}/>
+            )
+          )
+        }
+      </Carousel>);
 
   }
 }

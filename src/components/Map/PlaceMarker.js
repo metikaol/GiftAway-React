@@ -6,15 +6,11 @@ class PlaceMarker extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      showTooltip: false
-    }
+    this.state = {showTooltip: false}
   }
 
   clickTooltip() {
-    this.setState({
-      showTooltip: !this.state.showTooltip
-    })
+    this.setState({showTooltip: !this.state.showTooltip})
   }
 
   closeWindow() {
@@ -32,10 +28,15 @@ class PlaceMarker extends Component {
       created_at
     } = this.props
 
-    return (<Marker position={{
+    return (
+    <Marker
+      position={{
         lat: parseFloat(lat),
         lng: parseFloat(lng)
-      }} onClick={this.clickTooltip.bind(this)} key={`marker${id}`}>
+      }}
+      onClick={this.clickTooltip.bind(this)}
+      key={`marker${id}`}
+    >
       {showTooltip && (<PlaceInfoWindow key={`info${id}`} id={id} title={title} albums={albums} created_at={created_at} closeWindow={this.closeWindow.bind(this)}/>)}
     </Marker>)
   }

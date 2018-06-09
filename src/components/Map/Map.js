@@ -7,13 +7,22 @@ import {Maps} from '../../lib/requests';
 const DOMAIN = 'http://localhost:3000';
 
 const GiftAwayMap = withGoogleMap(props => {
-  return (<GoogleMap ref={props.onMapMounted} onZoomChanged={props.handleMapChanged} onDragEnd={props.handleMapChanged} onBoundsChanged={props.handleMapFullyLoaded} defaultCenter={props.center} defaultZoom={props.zoom} center={{
+  return (
+    <GoogleMap ref={props.onMapMounted}
+      onZoomChanged={props.handleMapChanged} onDragEnd={props.handleMapChanged} onBoundsChanged={props.handleMapFullyLoaded} defaultCenter={props.center} defaultZoom={props.zoom} center={{
       lat: props.center.lat,
       lng: props.center.lng
-    }}>
+      }}
+    >
 
-    {props.places.length > 0 && props.places.map(place => (<PlaceMarker key={`place${place.id}`} id={place.id} lat={place.latitude} lng={place.longitude} title={place.title} albums={place.albums} created_at={place.created_at}/>))}
-  </GoogleMap>)
+      {
+        props.places.length > 0 && props.places.map(
+          place => (
+            <PlaceMarker key={`place${place.id}`} id={place.id} lat={place.latitude} lng={place.longitude} title={place.title} albums={place.albums} created_at={place.created_at}/>
+          )
+        )
+      }
+    </GoogleMap>)
 });
 
 class Map extends Component {
@@ -77,14 +86,20 @@ class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-
-    fetch(`${DOMAIN}/api/v1/posts?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`, {
+    fetch(
+      `${DOMAIN}/api/v1/posts?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
+      {
       method: 'GET'
-    }, {
+      },
+      {
       headers: {
         'Authorization': localStorage.getItem('jwt')
+        }
       }
-    }).then((response) => response.json()).then((response) => this.setState({places: response})).catch((response) => console.log(response))
+    )
+    .then((response) => response.json())
+    .then((response) => this.setState({places: response}))
+    .catch((response) => console.log(response))
   }
 
   updatePosts(posts, latLng) {
@@ -116,42 +131,37 @@ class Map extends Component {
   render() {
     const {places} = this.state;
 
-    return (<div style={{
+    return (
+      <div style={{
         width: `1200px`,
         height: `550px`,
         marginLeft: "125px",
-        marginTop: "10px"
-      }}>
+        marginTop: "10px"}}
+      >
 
-      <div>
-        <Button outline="outline" color="info" onClick={this.toggle} style={{
-            marginBottom: '1rem',
-            fontSize: 15
-          }}>Search</Button>
-        <Collapse isOpen={this.state.collapse}>
-          <Card>
-            <CardBody>
-              <SearchBox updatePosts={this.updatePosts.bind(this)}/>
-            </CardBody>
-          </Card>
-        </Collapse>
+        <div>
+          <Button outline="outline" color="info" onClick={this.toggle} style={{
+              marginBottom: '1rem',
+              fontSize: 15
+            }}>Search</Button>
+          <Collapse isOpen={this.state.collapse}>
+            <Card>
+              <CardBody>
+                <SearchBox updatePosts={this.updatePosts.bind(this)}/>
+              </CardBody>
+            </Card>
+          </Collapse>
+        </div>
+
+        <GiftAwayMap onMapMounted={this.handleMapMounted.bind(this)}
+          handleMapChanged={this.handleMapChanged.bind(this)} handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)} center={{
+            lat: this.state.center.lat,
+            lng: this.state.center.lng
+          }}
+          places={places} zoom={this.zoom}
+          containerElement={<div style = {{ height: `100%` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
       </div>
-
-      {/* <ul>
-          <li>lng: {this.state.center.lng}</li>
-          <li>lat: {this.state.center.lat}</li>
-          <li>xMapBounds.min: {this.xMapBounds.min}</li>
-          <li>xMapBounds.max: {this.xMapBounds.max}</li>
-          <li>yMapBounds.min: {this.yMapBounds.min}</li>
-          <li>yMapBounds.max: {this.yMapBounds.max}</li>
-        </ul> */
-      }
-
-      <GiftAwayMap onMapMounted={this.handleMapMounted.bind(this)} handleMapChanged={this.handleMapChanged.bind(this)} handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)} center={{
-          lat: this.state.center.lat,
-          lng: this.state.center.lng
-        }} places={places} zoom={this.zoom} containerElement={<div style = {{ height: `100%` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
-    </div>);
+    );
   }
 }
 
